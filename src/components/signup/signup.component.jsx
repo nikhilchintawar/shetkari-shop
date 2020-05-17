@@ -5,7 +5,7 @@ import SubmitButton from '../submit-button/submit-button.component';
 
 const SignUp = () => {
 
-    return(<div className="signup">
+    return(<div className="form">
         <form action="" method="post">
         <InputField
         label="FirstName:"
