@@ -1,12 +1,12 @@
 import React from "react";
 
 
-const InputField = ({label, type, id, name, placeholder}) => {
+const InputField = ({label, type, name, placeholder, handleChange, otherProps}) => {
     return(
         <div>
-            <label htmlFor="">{label}
-                <input type={type} id={id} name={name} placeholder={placeholder} required/>
-            </label>
+            <label htmlFor="">{label}</label>
+                <input type={type} name={name} placeholder={placeholder} onChange={handleChange} {...otherProps} required/>
+            
         </div>
     )
 }

@@ -1,18 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './signup.styles.css'
 import InputField from "../input/input.component";
 import SubmitButton from '../submit-button/submit-button.component';
 
 const SignUp = () => {
+    const [value, setValue] = useState({
+        firstName: "",
+        lastName: "",
+        userName: "",
+        email:"",
+        tel:"",
+        address: "",
+        password:"",
+        confirmPassword:""
+    });
+    const handleChange = (event) => {
+        
+        console.log(event.target.value)
+        setValue({[event.target.name]:event.target.value});
+    }
 
-    return(<div className="form">
-        <form action="" method="post">
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        const {password, confirmPassword} = value
+
+        if (password !== confirmPassword) {
+            alert("password doesn't match");
+            return;
+        }
+        alert(`your name is ${value.firstName}`)
+    }
+
+    const {firstName, lastName, userName, tel, email, address, password, confirmPassword} = value
+
+    return(
+    <div className="form">
+        <form action="" method="post" onSubmit={handleSubmit}>
         <InputField
         label="FirstName:"
         type="text"
         id="firstName"
         name="firstName"
         placeholder="First Name"
+        value={firstName}
+        handleChange={handleChange}
         />
         <InputField
         label="LastName:"
@@ -20,6 +52,8 @@ const SignUp = () => {
         id="lastName"
         name="lastName"
         placeholder="Last Name"
+        value={lastName}
+        handleChange={handleChange}
         />
         <InputField
         label="UserName:"
@@ -27,6 +61,8 @@ const SignUp = () => {
         id="userName"
         name="userName"
         placeholder="username"
+        value={userName}
+        onChange={handleChange}
         />
         <InputField
         label="Email:"
@@ -34,6 +70,8 @@ const SignUp = () => {
         id="email"
         name="email"
         placeholder="Email"
+        value={email}
+        handleChange={handleChange}
         />
         <InputField
         label="Mobile No.:"
@@ -41,6 +79,8 @@ const SignUp = () => {
         id="tel"
         name="tel"
         placeholder="Mobile Number"
+        value={tel}
+        handleChange={handleChange}
         />
         <InputField
         label="Address:"
@@ -48,6 +88,8 @@ const SignUp = () => {
         id="address"
         name="address"
         placeholder="Address"
+        value={address}
+        handleChange={handleChange}
         />
         <InputField
         label="Password:"
@@ -55,6 +97,17 @@ const SignUp = () => {
         id="password"
         name="password"
         placeholder="password"
+        value={password}
+        handleChange={handleChange}
+        />
+        <InputField
+        label="Confirm Password:"
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        handleChange={handleChange}
         />
         <SubmitButton 
         type="submit"
