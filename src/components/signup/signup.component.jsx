@@ -37,6 +37,7 @@ const SignUp = () => {
 
     return(
     <div className="form">
+    <span>If you are already signed up, then <Link to='/signin'>sign in</Link> here.</span>
         <form action="" method="post" onSubmit={handleSubmit}>
         <InputField
         label="FirstName:"
@@ -115,7 +116,6 @@ const SignUp = () => {
         value="Submit"
         />
         </form>
-        <span>If you are already signed up, then <Link to='/signin'>sign in</Link> here.</span>
     </div>)
 }
 

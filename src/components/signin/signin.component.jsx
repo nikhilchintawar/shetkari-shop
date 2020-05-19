@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import InputField from "../input/input.component";
 import SubmitButton from "../submit-button/submit-button.component";
+import { Link } from "react-router-dom";
 
 
 const SignIn = () => {
@@ -45,6 +46,7 @@ const SignIn = () => {
         value="Submit"
         />
         </form>
+        <span>If you don't have an account then <Link to='/signup'>sign up</Link> here.</span>
         </div>
     )
     
