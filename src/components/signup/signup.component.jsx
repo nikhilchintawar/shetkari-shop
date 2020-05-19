@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './signup.styles.css'
 import InputField from "../input/input.component";
 import SubmitButton from '../submit-button/submit-button.component';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
     const [value, setValue] = useState({
@@ -114,6 +115,7 @@ const SignUp = () => {
         value="Submit"
         />
         </form>
+        <span>If you are already signed up, then <Link to='/signin'>sign in</Link> here.</span>
     </div>)
 }
 
