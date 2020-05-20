@@ -6,13 +6,13 @@ import './header.styles.css';
 
 
 
-const Header = () => {
+const Header = ({pathname}) => {
     return(
         <div className='header'>
         <div className="options">
             <Link className='option' to='/signin'>
                 Sign In
-            </Link>
+            </Link> 
             <Link className='option' to='/products'>
                 Products
             </Link>

@@ -1,0 +1,16 @@
+.card{
+    /* background-image: url('../../assets/vegetables.jpg'); */
+    width: 40vw;
+    height: 70vh;
+    margin-top: 3rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.title{
+    font-size: 2rem;
+}
