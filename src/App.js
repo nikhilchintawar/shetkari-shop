@@ -7,20 +7,18 @@ import SignIn from './components/signin/signin.component';
 import SignUp from './components/signup/signup.component';
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
-
+import ContactForm from './components/contact-form/contact-form.component';
 
 function App() {
   return (
     <div className="App">
     <Header />
     <Switch>
-    <Route exact path='/' component={HomePage}/>
-    <Route exact path="/signup">
-         <SignUp />
-    </Route>
-    <Route exact path="/signin">
-         <SignIn />
-    </Route>
+    <Route exact path='/' component={HomePage} />
+    <Route exact path="/signup" component={SignUp} />
+    <Route exact path="/signin" component={SignIn} />
+    <Route exact path='/contact' component={ContactForm} />
+         
     </Switch>
     </div>
   );

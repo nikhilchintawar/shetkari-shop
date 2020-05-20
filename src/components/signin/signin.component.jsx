@@ -45,7 +45,7 @@ const SignIn = () => {
         />
         <SubmitButton 
         type="submit"
-        value="Submit"
+        value="SIGN IN"
         />
         </form>
         <span>If you don't have an account then <Link to='/signup'>sign up</Link> here.</span>

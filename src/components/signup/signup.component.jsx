@@ -115,7 +115,7 @@ const SignUp = () => {
         />
         <SubmitButton 
         type="submit"
-        value="Submit"
+        value="SIGN UP"
         />
         </form>
     </div>)
