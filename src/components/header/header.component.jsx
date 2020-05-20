@@ -6,7 +6,7 @@ import './header.styles.css';
 
 
 
-const Header = ({pathname}) => {
+const Header = () => {
     return(
         <div className='header'>
         <div className="options">
@@ -18,6 +18,9 @@ const Header = ({pathname}) => {
             </Link>
             <Link className='option' to='/about'>
                 About
+            </Link>
+            <Link className='option' to='/contact'>
+                Contact Us
             </Link>
         </div>    
         </div>

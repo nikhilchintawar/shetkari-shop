@@ -16,9 +16,11 @@ const SignUp = () => {
         confirmPassword:""
     });
     const handleChange = (event) => {
-        
+        const {name, value} = event.target;
         console.log(event.target.value)
-        setValue({[event.target.name]:event.target.value});
+        setValue(prevState => ({
+            ...prevState,
+            [name]:value}))
     }
 
     const handleSubmit = (event) => {

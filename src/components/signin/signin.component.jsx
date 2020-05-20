@@ -11,7 +11,9 @@ const SignIn = () => {
     });
     const handleChange = (event) => {
         const {name, value} = event.target
-        setValue({[name]:value});
+        setValue(prevState => ({
+            ...prevState,
+            [name]:value}))
     }
 
     const handleSubmit = (event) => {
