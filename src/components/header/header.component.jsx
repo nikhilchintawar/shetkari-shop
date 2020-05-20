@@ -11,17 +11,18 @@ const Header = () => {
     return(
         <div className='header'>
         <div className="options">
+        
             <Link className='option' to='/signin'>
-                Sign In
+                SIGN IN
             </Link> 
             <Link className='option' to='/products'>
-                Products
+                SHOP
             </Link>
             <Link className='option' to='/about'>
-                About
+                ABOUT
             </Link>
             <Link className='option' to='/contact'>
-                Contact Us
+                CONTACT US
             </Link>
         </div>    
         </div>

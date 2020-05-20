@@ -4,3 +4,10 @@
     grid-template-columns:1fr 1fr;
     margin: 0 auto;
 }
+
+@media screen and (max-width: 600px){
+    .cards{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
