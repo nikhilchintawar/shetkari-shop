@@ -5,8 +5,9 @@ import VegetableImage from '../../assets/vegetables.jpg';
 import GrainImage from '../../assets/grains.jpg';
 
 
-const HomePage = () => {
+const HomePage = ({user}) => {
     return (
+        <div>
         <div class='cards'>
             <HomePageCard
             imageUrl={VegetableImage}
@@ -14,6 +15,7 @@ const HomePage = () => {
             <HomePageCard
             imageUrl={GrainImage}
             title='Grains' />
+        </div>
         </div>
     )
 }

@@ -1,29 +1,36 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import './header.styles.css';
 
 
 import { ReactComponent as Logo} from '../../assets/seeding.svg';
 
+const currentTab = (history, path) => {
+    if (history.location.pathname === path) {
+      return { color: "#ffffff" };
+    } else {
+      return { color: "#800080" };
+    }
+  };
 
 
-const Header = () => {
+const Header = ({history}) => {
     return(
         <div className='header'>
         <Link className='logo-container' to='/'>
             <Logo className='logo' />
         </Link>
         <div className="options">       
-            <Link className='option' to='/signin'>
+            <Link style={currentTab(history, '/signin')} className='option' to='/signin'>
                 SIGN IN
             </Link> 
-            <Link className='option' to='/products'>
+            <Link style={currentTab(history, '/products')} className='option' to='/products'>
                 SHOP
             </Link>
-            <Link className='option' to='/about'>
+            <Link style={currentTab(history, '/about')} className='option' to='/about'>
                 ABOUT
             </Link>
-            <Link className='option' to='/contact'>
+            <Link style={currentTab(history, '/contact')} className='option' to='/contact'>
                 CONTACT US
             </Link>
         </div>    
@@ -31,4 +38,4 @@ const Header = () => {
     )
 }
 
-export default Header;
+export default withRouter(Header);

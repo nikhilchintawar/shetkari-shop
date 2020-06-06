@@ -8,8 +8,9 @@ import SignUp from './user/signup/signup.component';
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import ContactForm from './components/contact-form/contact-form.component';
+import Footer from './components/footer/footer.component';
 
-function App() {
+function Routes() {
   return (
     <div className="App">
     <Header />
@@ -18,10 +19,12 @@ function App() {
     <Route exact path="/signup" component={SignUp} />
     <Route exact path="/signin" component={SignIn} />
     <Route exact path='/contact' component={ContactForm} />
+    
          
     </Switch>
+    <Footer />
     </div>
   );
 }
 
-export default App;
+export default Routes;

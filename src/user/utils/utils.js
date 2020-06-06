@@ -5,7 +5,7 @@ import { isAuthenticated } from "../../auth/helper/auth-data";
 const {user} = isAuthenticated();
 
 
-const performRedirect = ({didRedirect}) => {
+const performRedirect = (didRedirect) => {
     if(didRedirect){
         if(user && user.role === 1){
             return <Redirect to="/farmer/dashboard" />
@@ -18,4 +18,14 @@ const performRedirect = ({didRedirect}) => {
     }
 }
 
-export { performRedirect }
+const loadingMessage = (loading) => {
+    return (
+      loading && (
+        <div>
+          <h2>Loading...</h2>
+        </div>
+      )
+    );
+  };
+
+export { performRedirect, loadingMessage }

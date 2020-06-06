@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import InputField from "../../components/input/input.component";
 import SubmitButton from "../../components/submit-button/submit-button.component";
 import { Link, Redirect } from "react-router-dom";
-import { signin, authenticate, isAuthenticated } from "../../auth/helper/auth-data";
+import { signin, authenticate } from "../../auth/helper/auth-data";
 import { performRedirect } from "../utils/utils";
 
 
@@ -40,8 +40,10 @@ const SignIn = () => {
             })
             .catch(err => console.log("sign in failed"))
     }
-    const {email, password, error, loading, didRedirect} = value
+    const {email, password, didRedirect} = value
 
+
+const SignInForm = () => {
     return(
         <div className="form signin">
         <form action="" method="post" onSubmit={handleSubmit}>
@@ -71,8 +73,13 @@ const SignIn = () => {
         <span>I don't have an account, then <Link to='/signup'>sign up</Link> here.</span>
         </div>
     );
-        
-    
+}
+
+return(
+    <div>
+    {SignInForm()}
+    </div>
+)
     }
 
 
