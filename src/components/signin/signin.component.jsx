@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const SignIn = () => {
     const [value, setValue] = useState({
-        userName: "",
+        email: "",
         password:""
     });
     const handleChange = (event) => {
@@ -18,21 +18,21 @@ const SignIn = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        alert(`your name is ${value.firstName}`)
+        alert(`your name is ${value.email}`)
     }
 
-    const {userName, password} = value
+    const {email, password} = value
     return(
         <div className="form signin">
         <form action="" method="post" onSubmit={handleSubmit}>
         <InputField
-        label="UserName:"
-        type="text"
-        id="userName"
-        name="userName"
-        placeholder="username"
+        label="Email:"
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email"
+        value={email}
         handleChange={handleChange}
-        value={userName}
         />
         <InputField
         label="Password:"

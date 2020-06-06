@@ -8,7 +8,6 @@ const SignUp = () => {
     const [value, setValue] = useState({
         firstName: "",
         lastName: "",
-        userName: "",
         email:"",
         tel:"",
         address: "",
@@ -35,7 +34,7 @@ const SignUp = () => {
         alert(`your name is ${value.firstName}`)
     }
 
-    const {firstName, lastName, userName, tel, email, address, password, confirmPassword} = value
+    const {firstName, lastName, tel, email, address, password, confirmPassword} = value
 
     return(
     <div className="form">
@@ -58,15 +57,6 @@ const SignUp = () => {
         placeholder="Last Name"
         value={lastName}
         handleChange={handleChange}
-        />
-        <InputField
-        label="UserName:"
-        type="text"
-        id="userName"
-        name="userName"
-        placeholder="username"
-        value={userName}
-        onChange={handleChange}
         />
         <InputField
         label="Email:"
