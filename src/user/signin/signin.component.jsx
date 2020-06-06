@@ -1,27 +1,47 @@
 import React, {useState} from "react";
-import InputField from "../input/input.component";
-import SubmitButton from "../submit-button/submit-button.component";
-import { Link } from "react-router-dom";
+import InputField from "../../components/input/input.component";
+import SubmitButton from "../../components/submit-button/submit-button.component";
+import { Link, Redirect } from "react-router-dom";
+import { signin, authenticate, isAuthenticated } from "../../auth/helper/auth-data";
+import { performRedirect } from "../utils/utils";
 
 
 const SignIn = () => {
     const [value, setValue] = useState({
         email: "",
-        password:""
+        password:"",
+        error: "",
+        loading: false,
+        didRedirect: false
     });
     const handleChange = (event) => {
         const {name, value} = event.target
         setValue(prevState => ({
             ...prevState,
+            error: false,
             [name]:value}))
     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        alert(`your name is ${value.email}`)
+        setValue({ ...value, error: false, loading: true});
+        signin({ email, password })
+            .then(data => {
+                if(data.error){
+                    setValue({ ...value, error: data.error, loading: false })
+                } else{
+                    authenticate(data, () => {
+                        setValue({
+                            ...value,
+                            didRedirect: true
+                        })
+                    })
+                }
+            })
+            .catch(err => console.log("sign in failed"))
     }
+    const {email, password, error, loading, didRedirect} = value
 
-    const {email, password} = value
     return(
         <div className="form signin">
         <form action="" method="post" onSubmit={handleSubmit}>
@@ -50,8 +70,11 @@ const SignIn = () => {
         </form>
         <span>I don't have an account, then <Link to='/signup'>sign up</Link> here.</span>
         </div>
-    )
+    );
+        
     
-}
+    }
+
+
 
 export default SignIn;

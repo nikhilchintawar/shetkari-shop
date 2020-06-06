@@ -3,8 +3,8 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 
 
-import SignIn from './components/signin/signin.component';
-import SignUp from './components/signup/signup.component';
+import SignIn from './user/signin/signin.component';
+import SignUp from './user/signup/signup.component';
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import ContactForm from './components/contact-form/contact-form.component';
