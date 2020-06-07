@@ -18,6 +18,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    align-self: center;
+    list-style: none;
 }
 .option{
     cursor: pointer;

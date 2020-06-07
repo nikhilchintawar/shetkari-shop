@@ -4,25 +4,29 @@ import InputField from "../../components/input/input.component";
 import SubmitButton from '../../components/submit-button/submit-button.component';
 import { Link } from 'react-router-dom';
 
+import { signup } from "../../auth/helper/auth-data";
+import { successMessage, errorMessage } from "../utils/utils";
+
 const SignUp = () => {
     const [value, setValue] = useState({
         firstName: "",
         lastName: "",
         email:"",
-        tel:"",
-        address: "",
+        mobileNumber:"",
+        postalAddress: "",
         password:"",
-        confirmPassword:""
+        confirmPassword:"",
+        error: "",
+        success: false
     });
     const handleChange = (event) => {
         const {name, value} = event.target;
-        console.log(event.target.value)
         setValue(prevState => ({
             ...prevState,
             [name]:value}))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault()
 
         const {password, confirmPassword} = value
@@ -31,15 +35,36 @@ const SignUp = () => {
             alert("password doesn't match");
             return;
         }
-        alert(`your name is ${value.firstName}`)
+        setValue({ ...value, error: false });
+        await signup({ firstName, lastName, email, mobileNumber, postalAddress, password })
+            .then(data => {
+                if(data.error){
+                    setValue({ ...value, error: data.error, success: false })
+                } else{
+                    setValue({
+                        ...value,
+                        firstName:"",
+                        lastName: "",
+                        email: "",
+                        mobileNumber: "",
+                        postalAddress: "",
+                        password: "",
+                        confirmPassword: "",
+                        error: "",
+                        success: true
+                    })
+                }
+            })
+            .catch(err => console.log(err))
     }
 
-    const {firstName, lastName, tel, email, address, password, confirmPassword} = value
+    const {firstName, lastName, mobileNumber, email, postalAddress, password, confirmPassword   } = value
 
+    const signUpForm = () => {
     return(
     <div className="form">
     <span>I already have an account, then <Link to='/signin'>sign in</Link> here.</span>
-        <form action="" method="post" onSubmit={handleSubmit}>
+        <form>
         <InputField
         label="FirstName:"
         type="text"
@@ -73,7 +98,7 @@ const SignUp = () => {
         id="tel"
         name="tel"
         placeholder="Mobile Number"
-        value={tel}
+        value={mobileNumber}
         handleChange={handleChange}
         />
         <InputField
@@ -82,7 +107,7 @@ const SignUp = () => {
         id="address"
         name="address"
         placeholder="Address"
-        value={address}
+        value={postalAddress}
         handleChange={handleChange}
         />
         <InputField
@@ -106,9 +131,23 @@ const SignUp = () => {
         <SubmitButton 
         type="submit"
         value="SIGN UP"
+        onClick={handleSubmit}
         />
         </form>
     </div>)
 }
+
+return (
+    <div>
+    {successMessage()}
+    {errorMessage()}
+    {signUpForm()}
+    </div>
+)
+}
+
+
+
+
 
 export default SignUp;

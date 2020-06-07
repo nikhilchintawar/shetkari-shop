@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import InputField from "../../components/input/input.component";
 import SubmitButton from "../../components/submit-button/submit-button.component";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { signin, authenticate } from "../../auth/helper/auth-data";
-import { performRedirect } from "../utils/utils";
+import { performRedirect, loadingMessage, successMessage, errorMessage } from "../utils/utils";
 
 
 const SignIn = () => {
@@ -22,19 +22,19 @@ const SignIn = () => {
             [name]:value}))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         setValue({ ...value, error: false, loading: true});
-        signin({ email, password })
+        await signin({ email, password })
             .then(data => {
-                if(data.error){
-                    setValue({ ...value, error: data.error, loading: false })
+                if(data?.error){
+                    setValue({ ...value, error: data?.error, loading: false })
                 } else{
                     authenticate(data, () => {
                         setValue({
                             ...value,
                             didRedirect: true
-                        })
+                        })                     
                     })
                 }
             })
@@ -42,11 +42,12 @@ const SignIn = () => {
     }
     const {email, password, didRedirect} = value
 
+    
 
 const SignInForm = () => {
     return(
         <div className="form signin">
-        <form action="" method="post" onSubmit={handleSubmit}>
+        <form>
         <InputField
         label="Email:"
         type="email"
@@ -68,6 +69,7 @@ const SignInForm = () => {
         <SubmitButton 
         type="submit"
         value="SIGN IN"
+        onClick={handleSubmit}
         />
         </form>
         <span>I don't have an account, then <Link to='/signup'>sign up</Link> here.</span>
@@ -77,7 +79,11 @@ const SignInForm = () => {
 
 return(
     <div>
+    {loadingMessage()}
+    {successMessage()}
+    {errorMessage()}
     {SignInForm()}
+    {/* {performRedirect()} */}
     </div>
 )
     }
