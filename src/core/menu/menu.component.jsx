@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import './header.styles.css';
 
 
 import { ReactComponent as Logo} from '../../assets/seeding.svg';
-import { isAuthenticated, signout } from '../../auth/helper/auth-data';
+import { isAuthenticated } from '../../auth/helper/auth-data';
+
 
 const currentTab = (history, path) => {
     if (history.location.pathname === path) {
@@ -15,7 +16,8 @@ const currentTab = (history, path) => {
   };
 
 
-const Menu = ({history}) => {
+const Menu = ({ history }) => {
+    
     return(
         <div className='header'>
         
@@ -23,13 +25,41 @@ const Menu = ({history}) => {
             <Logo className='logo' />
         </Link>
         <ul className="options">
+
+        {!isAuthenticated() && (
+            <Fragment>
             <li>
-            <Link style={currentTab(history, '/signin')} className='option' to='/signin'>
+            <Link 
+                style={currentTab(history, '/signup')} 
+                className='option' 
+                to='/signup'
+            >
+                SIGN UP
+            </Link> 
+            </li>
+            <li>
+            <Link 
+                style={currentTab(history, '/signin')} 
+                className='option' 
+                to='/signin'
+            >
                 SIGN IN
             </Link> 
             </li>
-            
-            {isAuthenticated() && (
+            </Fragment>
+        )}
+        { isAuthenticated() && isAuthenticated().user.role === 0 && (
+            <li>
+                <Link
+                    style={currentTab(history, "user/profile")}
+                    className="option"
+                    to="user/profile"
+                    >
+                        PROFILE
+                    </Link>
+            </li>
+        )}
+            {isAuthenticated() &&  isAuthenticated().user.role === 1 && (
                 <li>
                     <Link
                     style={currentTab(history, "/farmer/dashboard")}

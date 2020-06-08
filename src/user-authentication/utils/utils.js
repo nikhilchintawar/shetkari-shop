@@ -11,8 +11,7 @@ const performRedirect = (didRedirect) => {
             return <Redirect to="/farmer/dashboard" />
         }else{
             return <Redirect to="/shop" />
-        }
-      
+        }     
     }
     if(isAuthenticated()){
         return <Redirect to="/" />
@@ -48,8 +47,7 @@ const errorMessage = (error) => {
         <div
         style={{ display: error ? "" : "none"}}
         >
-            sorry, Try again.
-        <Link to="/signup">Sign Up here</Link>
+        {error}
         </div>
         </div>
     )

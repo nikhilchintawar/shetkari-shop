@@ -28,7 +28,7 @@ const SignIn = () => {
         await signin({ email, password })
             .then(data => {
                 if(data.error){
-                    setValue({ ...value, error: data.error, loading: false })
+                    setValue({ ...value, error: data.error, loading: false, didRedirect: false })
                 } else{
                     authenticate(data, () => {
                         setValue({
@@ -47,7 +47,7 @@ const SignIn = () => {
 const SignInForm = () => {
     return(
         <div className="form signin">
-        <form>
+        <form method="post" onSubmit={handleSubmit}>
         <InputField
         label="Email:"
         type="email"
@@ -64,12 +64,11 @@ const SignInForm = () => {
         name="password"
         placeholder="password"
         handleChange={handleChange}
-        value={password}
+        value={password}       
         />
         <SubmitButton 
         type="submit"
         value="SIGN IN"
-        onClick={handleSubmit}
         />
         </form>
         <span>I don't have an account, then <Link to='/signup'>sign up</Link> here.</span>

@@ -1,8 +1,8 @@
 import React from "react";
 
 
-const SubmitButton = ({type, value, onClick}) => (
-    <input type={type} value={value} onClick={onClick}/>
+const SubmitButton = ({type, value, onClick, ...props}) => (
+    <input type={type} value={value} onClick={onClick} {...props}/>
 )
 
 export default SubmitButton;

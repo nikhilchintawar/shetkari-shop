@@ -3,17 +3,18 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 
 
-import SignIn from './user/signin/signin.component';
-import SignUp from './user/signup/signup.component';
+import SignIn from './user-authentication/signin/signin.component';
+import SignUp from './user-authentication/signup/signup.component';
 import HomePage from './pages/homepage/homepage.component';
 import ContactForm from './components/contact-form/contact-form.component';
-import Footer from './components/footer/footer.component';
-import Menu from './components/menu/menu.component';
+import Menu from "./core/menu/menu.component";
+import Footer from "./core/footer/footer.component";
 
 function Routes() {
   return (
-    <div className="App">
+    <div>
     <Menu />
+    <div className="App">
     <Switch>
     <Route exact path='/' component={HomePage} />
     <Route exact path="/signup" component={SignUp} />
@@ -22,6 +23,7 @@ function Routes() {
     
          
     </Switch>
+    </div>
     <Footer />
     </div>
   );

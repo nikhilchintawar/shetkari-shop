@@ -37,7 +37,7 @@ const authenticate = (data, next) => {
         localStorage.setItem("jwt", JSON.stringify(data))
         next();
     }
-}
+};
 
 const signout = next => {
     if(typeof window !== "undefined")

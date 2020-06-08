@@ -8,7 +8,7 @@ import GrainImage from '../../assets/grains.jpg';
 const HomePage = ({user}) => {
     return (
         <div>
-        <div class='cards'>
+        <div className='cards'>
             <HomePageCard
             imageUrl={VegetableImage}
             title='Vegetables' />

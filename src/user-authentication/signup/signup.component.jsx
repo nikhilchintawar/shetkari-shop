@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './signup.styles.css'
 import InputField from "../../components/input/input.component";
 import SubmitButton from '../../components/submit-button/submit-button.component';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { signup } from "../../auth/helper/auth-data";
 import { successMessage ,errorMessage } from "../utils/utils";
@@ -64,7 +64,7 @@ const SignUp = () => {
     return(
     <div className="form">
     <span>I already have an account, then <Link to='/signin'>sign in</Link> here.</span>
-        <form>
+        <form method="post" onSubmit={handleSubmit}>
         <InputField
         label="FirstName:"
         type="text"
@@ -130,8 +130,7 @@ const SignUp = () => {
         />
         <SubmitButton 
         type="submit"
-        value="SIGN UP"
-        onClick={handleSubmit}
+        value="SIGN UP"   
         />
         </form>
     </div>

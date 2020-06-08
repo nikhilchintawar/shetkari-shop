@@ -1,0 +1,28 @@
+.footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 100%; 
+    background-color: #d3d3d3;
+    font-size: 0.8rem;
+    color: #800080;   
+}
+.signOut{
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem;
+}
+.signOutButton{  
+    background-color: #4caf50;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.copyright{
+    display: flex;
+    justify-content: center;
+}
