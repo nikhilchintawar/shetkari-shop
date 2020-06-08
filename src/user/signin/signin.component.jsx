@@ -3,7 +3,7 @@ import InputField from "../../components/input/input.component";
 import SubmitButton from "../../components/submit-button/submit-button.component";
 import { Link } from "react-router-dom";
 import { signin, authenticate } from "../../auth/helper/auth-data";
-import { performRedirect, loadingMessage, successMessage, errorMessage } from "../utils/utils";
+import { performRedirect, loadingMessage, errorMessage } from "../utils/utils";
 
 
 const SignIn = () => {
@@ -27,8 +27,8 @@ const SignIn = () => {
         setValue({ ...value, error: false, loading: true});
         await signin({ email, password })
             .then(data => {
-                if(data?.error){
-                    setValue({ ...value, error: data?.error, loading: false })
+                if(data.error){
+                    setValue({ ...value, error: data.error, loading: false })
                 } else{
                     authenticate(data, () => {
                         setValue({
@@ -40,7 +40,7 @@ const SignIn = () => {
             })
             .catch(err => console.log("sign in failed"))
     }
-    const {email, password, didRedirect} = value
+    const {email, password, didRedirect, loading, error} = value
 
     
 
@@ -79,11 +79,10 @@ const SignInForm = () => {
 
 return(
     <div>
-    {loadingMessage()}
-    {successMessage()}
-    {errorMessage()}
+    {loadingMessage(loading)}
+    {errorMessage(error)}
     {SignInForm()}
-    {/* {performRedirect()} */}
+    {performRedirect(didRedirect)}
     </div>
 )
     }

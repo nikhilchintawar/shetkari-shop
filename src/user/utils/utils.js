@@ -10,7 +10,7 @@ const performRedirect = (didRedirect) => {
         if(user && user.role === 1){
             return <Redirect to="/farmer/dashboard" />
         }else{
-            return <Redirect to="/" />
+            return <Redirect to="/shop" />
         }
       
     }

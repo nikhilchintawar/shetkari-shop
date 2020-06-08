@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './signup.styles.css'
 import InputField from "../../components/input/input.component";
 import SubmitButton from '../../components/submit-button/submit-button.component';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { signup } from "../../auth/helper/auth-data";
-import { successMessage, errorMessage } from "../utils/utils";
+import { successMessage ,errorMessage } from "../utils/utils";
 
 const SignUp = () => {
     const [value, setValue] = useState({
@@ -58,7 +58,7 @@ const SignUp = () => {
             .catch(err => console.log(err))
     }
 
-    const {firstName, lastName, mobileNumber, email, postalAddress, password, confirmPassword   } = value
+    const {firstName, lastName, mobileNumber, email, postalAddress, password, confirmPassword, success, error   } = value
 
     const signUpForm = () => {
     return(
@@ -96,7 +96,7 @@ const SignUp = () => {
         label="Mobile No.:"
         type="tel"
         id="tel"
-        name="tel"
+        name="mobileNumber"
         placeholder="Mobile Number"
         value={mobileNumber}
         handleChange={handleChange}
@@ -105,7 +105,7 @@ const SignUp = () => {
         label="Address:"
         type="text"
         id="address"
-        name="address"
+        name="postalAddress"
         placeholder="Address"
         value={postalAddress}
         handleChange={handleChange}
@@ -134,14 +134,17 @@ const SignUp = () => {
         onClick={handleSubmit}
         />
         </form>
-    </div>)
+    </div>
+    )
 }
+
 
 return (
     <div>
-    {successMessage()}
-    {errorMessage()}
+    {successMessage(success)}
+    {errorMessage(error)}
     {signUpForm()}
+  
     </div>
 )
 }

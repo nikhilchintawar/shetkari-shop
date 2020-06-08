@@ -28,7 +28,7 @@ const signin = (user) => {
         },
         body: JSON.stringify(user)
     })
-    .then(response => console.log(response.json()))
+    .then(response => response.json())
     .catch(err => console.log(err))
 }
 
@@ -53,12 +53,12 @@ const signout = next => {
 
 const isAuthenticated = () => {
     if (typeof window == "undefined"){
-        return false
+        return false;
     }
     if(localStorage.getItem("jwt")){
         return JSON.parse(localStorage.getItem("jwt"))
     }else{
-        return false
+        return false;
     }
 }
 
