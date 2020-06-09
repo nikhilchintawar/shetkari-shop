@@ -1,0 +1,22 @@
+.successMessage{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;    
+}
+.span{
+   color:#42aa53;
+   text-decoration: none;
+}
+.errorMessage{
+    display: flex;
+    justify-content: center;
+    color: #ff0000;
+    margin-top: 1rem;
+}
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2rem;
+}

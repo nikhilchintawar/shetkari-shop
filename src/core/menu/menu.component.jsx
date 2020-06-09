@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import './header.styles.css';
+import './menu.styles.css';
 
 
 import { ReactComponent as Logo} from '../../assets/seeding.svg';
+import { ReactComponent as Cart} from "../../assets/cart.svg";
 import { isAuthenticated } from '../../auth/helper/auth-data';
 
 
@@ -74,16 +75,11 @@ const Menu = ({ history }) => {
                 SHOP
             </Link>
             </li>
-            <li>
-            <Link style={currentTab(history, '/about')} className='option' to='/about'>
-                ABOUT
+           <li>
+            <Link className='option' to='/cart'>
+                <Cart className="cart" />
             </Link>
-            </li>
-            <li>
-            <Link style={currentTab(history, '/contact')} className='option' to='/contact'>
-                CONTACT US
-            </Link>
-            </li>
+           </li>
         
         </ul>
         </div>

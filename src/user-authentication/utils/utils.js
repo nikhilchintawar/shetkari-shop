@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect, Link } from "react-router-dom";
 import { isAuthenticated } from "../../auth/helper/auth-data";
+import "./utils.css";
 
 const {user} = isAuthenticated();
 
@@ -22,7 +23,7 @@ const loadingMessage = (loading) => {
     return (
       loading && (
         <div>
-          <h2>Loading...</h2>
+          <h2 className="loading">Loading...</h2>
         </div>
       )
     );
@@ -32,10 +33,11 @@ const loadingMessage = (loading) => {
     return (
         <div>
         <div
-        style={{ display: success ? "" : "none"}}
+        style={{ display: success ? "" : "none"}}   
+        className="successMessage"    
         >
-            New account is created successfully.
-        <Link to="/signin">Login Here</Link>
+        <span>New account is created successfully.
+        <Link to="/signin" className="span">Sign In </Link>Here.</span>
         </div>
         </div>
     )
@@ -47,7 +49,7 @@ const errorMessage = (error) => {
         <div
         style={{ display: error ? "" : "none"}}
         >
-        {error}
+        <span className="errorMessage">*{error}</span>
         </div>
         </div>
     )

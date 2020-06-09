@@ -21,6 +21,13 @@
     color: #ffffff;
     cursor: pointer;
 }
+.company{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    line-height: 1.5;
+}
 
 .copyright{
     display: flex;
