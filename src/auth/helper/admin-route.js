@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { isAuthenticated } from "./auth-data";
 
-const FarmerRoute = ({component: Component, ...rest}) => {
+const AdminRoute = ({component: Component, ...rest}) => {
     return (
         <Route
         {...rest}
@@ -23,4 +23,4 @@ const FarmerRoute = ({component: Component, ...rest}) => {
     );
 }
 
-export default FarmerRoute;
+export default AdminRoute;
