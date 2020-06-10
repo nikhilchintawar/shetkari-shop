@@ -71,7 +71,7 @@ const Menu = ({ history }) => {
                 </li>
             )}
             <li>
-            <Link style={currentTab(history, '/products')} className='option' to='/products'>
+            <Link style={currentTab(history, '/products')} className='option' to='/shop'>
                 SHOP
             </Link>
             </li>

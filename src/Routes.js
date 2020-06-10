@@ -11,6 +11,7 @@ import Menu from "./core/menu/menu.component";
 import Footer from "./core/footer/footer.component";
 import AdminRoute from './auth/helper/admin-route';
 import AdminDashBoard from "./user/admin-dashboard/AdminDashboard";
+import NotFounnd from './pages/404-page/NotFound';
 
 function Routes() {
   return (
@@ -19,11 +20,12 @@ function Routes() {
     <div className="App">
     <Switch>
     <Route exact path="/" component={HomePage} />
-    <Route exact path="/signup" component={SignUp} />
-    <Route exact path="/signin" component={SignIn} />
-    <Route exact path="/contact" component={ContactForm} />
+    <Route path="/signup" component={SignUp} />
+    <Route path="/signin" component={SignIn} />
+    <Route path="/contact" component={ContactForm} />
     <AdminRoute exact path="/farmer/dashboard" component={AdminDashBoard} />
-         
+
+    <Route path="" component={NotFounnd} />    
     </Switch>
     </div>
     <Footer />
