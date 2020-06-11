@@ -12,7 +12,7 @@ import Footer from "./core/footer/footer.component";
 import AdminRoute from './auth/helper/admin-route';
 import AdminDashBoard from "./user/admin-dashboard/AdminDashboard";
 import NotFounnd from './pages/404-page/NotFound';
-
+import AddProduct from "./admin/AddProduct";
 function Routes() {
   return (
     <div>
@@ -24,6 +24,7 @@ function Routes() {
     <Route path="/signin" component={SignIn} />
     <Route path="/contact" component={ContactForm} />
     <AdminRoute exact path="/farmer/dashboard" component={AdminDashBoard} />
+    <AdminRoute path="/farmer/create/product" component={AddProduct} />
 
     <Route path="" component={NotFounnd} />    
     </Switch>
