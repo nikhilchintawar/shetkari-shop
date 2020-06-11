@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { createProduct } from "./helper/adminApiCall";
 import { isAuthenticated } from "../auth/helper/auth-data";
@@ -6,7 +6,7 @@ import InputField from "../components/input/input.component";
 import SubmitButton from "../components/submit-button/submit-button.component";
 
 const AddProduct = () => {
-    const { user, token } = isAuthenticated();
+    const { user: {_id: id, firstName}, token } = isAuthenticated();
 
     const [values, setValues] = useState({
         name: "",
@@ -22,25 +22,22 @@ const AddProduct = () => {
         formData: ""
     });
 
-    // const preload = () => {
-    //     isAuthenticated().then(data => {
-    //         if(data.error){
-    //             setValues({...values, error: data.error, formData: new FormData()})
-    //         }else{
-    //             setValues({...values, category: data, formData: new FormData()})
-    //         }
-    //     })
-    // }
+    const preload = () => {
+        setValues({...values, formData: new FormData()})
+    };
 
-    // useEffect(() => {
-    //     preload();
-    // })
-
+    useEffect(() => {
+        preload();
+    }, []);
+    
     const handleSubmit = async(event) => {
         event.preventDefault();
+       
         setValues({...values, error: "", loading: true })
-        await createProduct(user._id, token, formData).then(data => {
+        
+        await createProduct(id, token, formData).then(data => {
             if(data.error){
+                console.log(data.error)
                 setValues({ ...values, error: data.error })
             }else{
                 setValues({
@@ -55,22 +52,17 @@ const AddProduct = () => {
                     createdProduct: data.name
                 });
             }
-        });
-    }
-   
-    const handleChange = (event) => {
-        const {name, value} = event.target;
-        const formData = new FormData()
-        formData.set(name, value);
-        setValues(prevState => ({
-            ...prevState,
-            error: false,
-            [name]: value
-        }))
+        })
     }
 
-    const { name, description, price, stock, photo, category, loading, error, createdProduct, getRedirect, formData } = values
-    
+    const handleChange = name => event => {
+        const value = name === "photo" ? event.target.files[0] : event.target.value;
+        formData.append(name, value);
+        
+        setValues({ ...values, [name]: value });
+      };
+
+    const { name, description, price, stock, category, loading, error, createdProduct, getRedirect, formData } = values
     const createProductForm = () => {
     return(
         <form method="post">
@@ -79,13 +71,13 @@ const AddProduct = () => {
             name="photo"
             accept="image"
             placeholder="choose a file"
-            handleChange={handleChange}
+            handleChange={handleChange("photo")}
             />
             <InputField
             name="name"
             placeholder="Name"
             value={name}
-            handleChange={handleChange}
+            handleChange={handleChange("name")}
             />
             <textarea
             name="description"
@@ -93,7 +85,7 @@ const AddProduct = () => {
             value={description}
             cols="5"
             rows="10"
-            onChange={handleChange}
+            onChange={handleChange("description")}
             />
             <InputField
             type="number"
@@ -101,9 +93,9 @@ const AddProduct = () => {
             id="stock"
             placeholder="Stock"
             value={stock}
-            handleChange={handleChange}
+            handleChange={handleChange("stock")}
             />
-            <select name="category" id="category" placeholder="Categoruy" value={category} onChange={handleChange}>
+            <select name="category" id="category" placeholder="Categoruy" value={category} onChange={handleChange("category")}>
                 <option>Select</option>
                 <option value="vegetable">vegetables</option>
                 <option value="grain">grains</option>
@@ -111,9 +103,9 @@ const AddProduct = () => {
             <InputField
             type="number"
             name="price"
-            placeholder="Price"
+            placeholder="Price(in RS)"
             value={price}
-            handleChange={handleChange}
+            handleChange={handleChange("price")}
             />
             <SubmitButton
             type="submit"
@@ -126,6 +118,7 @@ const AddProduct = () => {
 
 return (
     <div>
+    <h4>Welcome back, {firstName}</h4>
         {createProductForm()}
     </div>
 )
