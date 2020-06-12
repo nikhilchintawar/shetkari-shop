@@ -18,28 +18,32 @@ const AdminDashBoard = () => {
             <div className="adminFirstSection" >
                 <div >
                     <ul>
-                        <li className="adminOptionCard" style={{backgroundImage: `URL(${VegetableImage})`}}>
-                            <Link 
+                        <li>
+                        <Link 
                             to="/farmer/create/product"
                             className="adminOption" 
                             >
+                            <img src={VegetableImage} alt="VegetableImage" className="adminImage"/>
+                            
                                 <span className="adminTitle">Add Product</span>
                                 
                             </Link>
                         </li>
-                        <li className="adminOptionCard" style={{backgroundImage: `URL(${ManageProductImage})`}}>
+                        <li>
                             <Link 
                             to="/farmer/manage/product"
                             className="adminOption"
                             >
+                            <img src={ManageProductImage} alt="ManageProductImage" className="adminImage"/>
                              <span className="adminTitle">Manage Product</span>   
                             </Link>
                         </li>
-                        <li className="adminOptionCard" style={{backgroundImage: `URL(${ManageOrderImage})`}}>
+                        <li>
                             <Link 
                             to="/farmer/create/product"
                             className="adminOption"
                             >
+                            <img src={ManageOrderImage} alt="ManageOrderImage" className="adminImage"/>
                               <span className="adminTitle">Manage Orders</span>  
                             </Link>
                         </li>

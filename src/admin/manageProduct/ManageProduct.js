@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaUserEdit, FaTrash } from "react-icons/fa"
 import { isAuthenticated } from '../../auth/helper/auth-data';
 import { getAllProducts, deleteProduct } from '../helper/adminApiCall';
 
-const ManageProduct = () => {
+import "./manage-product.styles.css";
+
+const ManageProduct = ({match}) => {
     const [products, setProducts] = useState([]);
 
     const { user: {_id: id}, token } = isAuthenticated();
@@ -11,8 +14,7 @@ const ManageProduct = () => {
     const preload = () => {
         getAllProducts().then(data => {
             if(data.error){
-                console.log(data.error);
-                
+                console.log(data.error);            
             }else{
                 setProducts(data);
             }
@@ -35,19 +37,22 @@ const ManageProduct = () => {
 }
 
     return (
-        <div>
+        <div className="manageProducts">
             {
                 products.map((product, id) => {
                     return (
-                        <div key={id}>
+                        <div key={id} className="manageProduct">
                             <div>
-                                <h3>{product.name}</h3>
+                                <h3 className="productName">{product.name}</h3>
                             </div>
+
+                            {/* update and delete button */}
+                            <div className="updateAndDeleteButton">
                             <div>
                                 <Link
                                     to={`/farmer/product/update/${product._id}`}
                                 >
-                                    <span>Update</span>
+                                    <button className="manageButton"><FaUserEdit size={15} /></button>
                                 </Link>
                             </div>
                             <div>
@@ -55,9 +60,11 @@ const ManageProduct = () => {
                                     onClick={() => {
                                         deleteThisProduct(product._id);
                                     }}
+                                    className="manageButton"
                                 >
-                                    Delete
+                                    <FaTrash size={15} />
                                 </button>
+                            </div>
                             </div>
                         </div>
                     )

@@ -64,4 +64,16 @@ const deleteProduct = (productId, userId, token) => {
     })
 }
 
+// const getPhoto = (productId, photo) => {
+//     return fetch(`${API}/products/photo/${productId}`, {
+//         method: "GET",
+//         headers: {
+//             Accept: "application/json",
+//             "Content-Type": "application/json"
+//         }
+//     })
+//     .then(response => response.json())
+//     .catch(error => console.log(error))
+// }
+
 export {createProduct, getAllProducts, getProduct, updateProduct, deleteProduct}

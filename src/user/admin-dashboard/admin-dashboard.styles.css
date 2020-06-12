@@ -1,26 +1,29 @@
 li{
     list-style: none;
 }
-.adminOptionCard{
+.adminOption{
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.adminImage{
     width: 25vw;
     height: 20vh;
     color: #ffffff;
     border-radius: 0.5rem;
-    margin: 2.5rem;
-}
-.adminOption{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    cursor: pointer;
-    text-decoration: none;
+    margin-bottom: 1.5rem;
+    background-size: cover;
 }
 .adminTitle{
-    text-align: center;
-    margin-top: 3rem;
     background-color: #ffffff;
     padding: 0.7rem;
     border-radius: 0.5rem;
-    opacity: 0.7;
+    opacity: 0.6;
     font-weight: bold;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    z-index: 1;
 }
