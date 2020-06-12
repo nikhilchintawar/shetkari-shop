@@ -20,4 +20,15 @@ const SuccessMessage = (success, createdProduct) => {
     }
 }
 
-export  {SuccessMessage, CloseButton};
+const UpdateSuccessMessage = (success, createdProduct) => {
+    if(success){
+        return toast(`${createdProduct} is updated successfully.`, {
+            toastId: "",
+            className: "toast-class"
+        })
+    }
+}
+
+
+
+export  {SuccessMessage, CloseButton, UpdateSuccessMessage};

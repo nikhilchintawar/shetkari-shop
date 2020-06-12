@@ -39,14 +39,18 @@ const getProduct = productId => {
 }
 
 //update a product
-const updateProduct = (productId, userId, token) => {
+const updateProduct = (productId, userId, token, product) => {
     return fetch(`${API}/user/${userId}/product/${productId}`, {
         method: "PUT",
         headers: {
             Accept: "application/json",
             Authorization: `Bearer ${token}`
-        }
+        },
+        body: product
     })
+    .then(response => response.json())
+    .catch(error => console.log(error)
+    )
 }
 
 //delete product

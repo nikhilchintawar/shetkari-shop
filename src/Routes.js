@@ -14,6 +14,8 @@ import AdminDashBoard from "./user/admin-dashboard/AdminDashboard";
 import NotFounnd from './pages/404-page/NotFound';
 import AddProduct from "./admin/addProduct/AddProduct";
 import { CloseButton } from './admin/utils/utils';
+import ManageProduct from './admin/manageProduct/ManageProduct';
+import UpdateProduct from './admin/manageProduct/UpdateProduct';
 
 
 function Routes() {
@@ -32,6 +34,8 @@ function Routes() {
     <Route path="/contact" component={ContactForm} />
     <AdminRoute exact path="/farmer/dashboard" component={AdminDashBoard} />
     <AdminRoute path="/farmer/create/product" component={AddProduct} />
+    <AdminRoute path="/farmer/manage/product" component={ManageProduct} />
+    <AdminRoute path="/farmer/product/update/:productId" component={UpdateProduct} />
 
     <Route path="" component={NotFounnd} />    
     </Switch>
