@@ -1,12 +1,11 @@
 import React, { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast} from "react-toastify";
-import { createProduct } from "./helper/adminApiCall";
-import { isAuthenticated } from "../auth/helper/auth-data";
-import InputField from "../components/input/input.component";
-import SubmitButton from "../components/submit-button/submit-button.component";
-import {SuccessMessage} from "./utils/utils";
-import {loadingMessage, errorMessage} from "../user-authentication/utils/utils";
+import { createProduct } from "../helper/adminApiCall";
+import { isAuthenticated } from "../../auth/helper/auth-data";
+import InputField from "../../components/input/input.component";
+import SubmitButton from "../../components/submit-button/submit-button.component";
+import {SuccessMessage} from "../utils/utils";
+import {loadingMessage, errorMessage} from "../../user-authentication/utils/utils";
 
 import "./addproduct.styles.css";
 const AddProduct = () => {
@@ -42,7 +41,7 @@ const AddProduct = () => {
         await createProduct(id, token, formData).then(data => {
             if(data.error){
                 console.log(data.error)
-                setValues({ ...values, error: data.error })
+                setValues({ ...values, error: data.error, success: false })
             }else{
                 setValues({
                     ...values,
@@ -77,7 +76,7 @@ const AddProduct = () => {
             type="file"
             name="photo"
             accept="image"
-            placeholder="choose a file"
+            placeholder="choose file"
             handleChange={handleChange("photo")}
             />
             <InputField
@@ -128,7 +127,7 @@ const AddProduct = () => {
 return (
     <div>
     
-    <h4>Welcome back, {firstName}</h4>
+    <h4 className="createProductTitle">Welcome back, {firstName}</h4>
         {loadingMessage(loading)}
         {errorMessage(error)}
         {SuccessMessage(success, createdProduct)}

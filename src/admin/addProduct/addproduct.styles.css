@@ -1,0 +1,14 @@
+.createProductForm{
+    width: 85%;
+    margin-left: 7.5%;   
+    margin-bottom: 10rem;
+}
+option{
+    background-color: #ffffff;
+    padding: 0.4rem;
+    font-weight: bold;
+}
+.createProductTitle{
+    text-align: center;
+    padding: 0.5rem;
+}

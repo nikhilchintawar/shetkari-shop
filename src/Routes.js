@@ -12,7 +12,7 @@ import Footer from "./core/footer/footer.component";
 import AdminRoute from './auth/helper/admin-route';
 import AdminDashBoard from "./user/admin-dashboard/AdminDashboard";
 import NotFounnd from './pages/404-page/NotFound';
-import AddProduct from "./admin/AddProduct";
+import AddProduct from "./admin/addProduct/AddProduct";
 import { CloseButton } from './admin/utils/utils';
 
 

@@ -29,7 +29,7 @@ const AdminDashBoard = () => {
                         </li>
                         <li className="adminOptionCard" style={{backgroundImage: `URL(${ManageProductImage})`}}>
                             <Link 
-                            to="/farmer/create/product"
+                            to="/farmer/manage/product"
                             className="adminOption"
                             >
                              <span className="adminTitle">Manage Product</span>   

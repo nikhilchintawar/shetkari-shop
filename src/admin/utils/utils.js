@@ -13,7 +13,7 @@ const CloseButton = ({closeToast}) => (
 
 const SuccessMessage = (success, createdProduct) => {
     if(success){
-        return toast.success(`${createdProduct} is created successfully.`, {
+        return toast(`${createdProduct} is created successfully.`, {
             toastId: "",
             className: "toast-class"
         })
