@@ -1,10 +1,14 @@
 import React, { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast} from "react-toastify";
 import { createProduct } from "./helper/adminApiCall";
 import { isAuthenticated } from "../auth/helper/auth-data";
 import InputField from "../components/input/input.component";
 import SubmitButton from "../components/submit-button/submit-button.component";
+import {SuccessMessage} from "./utils/utils";
+import {loadingMessage, errorMessage} from "../user-authentication/utils/utils";
 
+import "./addproduct.styles.css";
 const AddProduct = () => {
     const { user: {_id: id, firstName}, token } = isAuthenticated();
 
@@ -18,7 +22,7 @@ const AddProduct = () => {
         loading: false,
         error: "",
         createdProduct: "",
-        getRedirect: false,
+        success: false,
         formData: ""
     });
 
@@ -49,6 +53,8 @@ const AddProduct = () => {
                     category: "",
                     stock: "",
                     loading: false,
+                    success: true,
+                    error:"",
                     createdProduct: data.name
                 });
             }
@@ -62,9 +68,10 @@ const AddProduct = () => {
         setValues({ ...values, [name]: value });
       };
 
-    const { name, description, price, stock, category, loading, error, createdProduct, getRedirect, formData } = values
+    const { name, description, price, stock, category, loading, error, createdProduct, success, formData } = values
     const createProductForm = () => {
     return(
+        <div className="createProductForm">
         <form method="post">
             <InputField
             type="file"
@@ -74,6 +81,7 @@ const AddProduct = () => {
             handleChange={handleChange("photo")}
             />
             <InputField
+            type="text"
             name="name"
             placeholder="Name"
             value={name}
@@ -113,12 +121,17 @@ const AddProduct = () => {
             onClick={handleSubmit}
             />
         </form>
+        </div>
     );
 }
 
 return (
     <div>
+    
     <h4>Welcome back, {firstName}</h4>
+        {loadingMessage(loading)}
+        {errorMessage(error)}
+        {SuccessMessage(success, createdProduct)}
         {createProductForm()}
     </div>
 )
