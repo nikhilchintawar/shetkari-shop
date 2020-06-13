@@ -120,6 +120,7 @@ const AddProduct = () => {
             onClick={handleSubmit}
             />
         </form>
+        <Link to="/farmer/dashboard"><SubmitButton type="submit" value="BACK" /></Link>
         </div>
     );
 }
@@ -127,7 +128,7 @@ const AddProduct = () => {
 return (
     <div>
     
-    <h4 className="createProductTitle">Welcome back, {firstName}</h4>
+    <h4 className="createProductTitle">Welcome back, <span className="userName">{firstName.toUpperCase()}</span></h4>
         {loadingMessage(loading)}
         {errorMessage(error)}
         {SuccessMessage(success, createdProduct)}

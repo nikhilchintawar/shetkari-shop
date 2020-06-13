@@ -5,11 +5,12 @@ import { isAuthenticated } from '../../auth/helper/auth-data';
 import { getAllProducts, deleteProduct } from '../helper/adminApiCall';
 
 import "./manage-product.styles.css";
+import ImageHelper from '../helper/ImageHelper';
 
 const ManageProduct = ({match}) => {
     const [products, setProducts] = useState([]);
 
-    const { user: {_id: id}, token } = isAuthenticated();
+    const { user: {_id: id, firstName}, token } = isAuthenticated();
 
     const preload = () => {
         getAllProducts().then(data => {
@@ -23,6 +24,7 @@ const ManageProduct = ({match}) => {
 
     useEffect(() => {
         preload();
+        
     }, [])
 
     const deleteThisProduct = (productId) => {
@@ -37,12 +39,18 @@ const ManageProduct = ({match}) => {
 }
 
     return (
+        <div>
+        <div className="createProductTitle">
+         Hi <span className="userName">{firstName.toUpperCase()}</span>
+        </div>
         <div className="manageProducts">
             {
                 products.map((product, id) => {
                     return (
                         <div key={id} className="manageProduct">
                             <div>
+                            {/* TODO: needed to fetch the image */}
+                            {/* <ImageHelper product={product} /> */}
                                 <h3 className="productName">{product.name}</h3>
                             </div>
 
@@ -70,6 +78,7 @@ const ManageProduct = ({match}) => {
                     )
                 })
             }
+        </div>
         </div>
     );
 };

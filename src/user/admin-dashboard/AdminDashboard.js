@@ -11,7 +11,7 @@ import ManageOrderImage from "../../assets/orderImage.jpeg";
 
 
 const AdminDashBoard = () => {
-    const { user: { firstName, lastName, email, mobileNumber, role }} = isAuthenticated();
+    const { user: { firstName }} = isAuthenticated();
 
     const adminFirstSection = () => {
         return (
@@ -55,7 +55,7 @@ const AdminDashBoard = () => {
 
     return (
         <div>
-            <h3 style={{textAlign: "center"}}>Farmer Dashboard</h3>
+            <h3 className="createProductTitle">Welcome back to Farmer Dashboard <span className="userName">{firstName.toUpperCase()}</span></h3>
             <div>{adminFirstSection()}</div>
         </div>
     )

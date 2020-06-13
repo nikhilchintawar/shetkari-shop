@@ -38,6 +38,7 @@ const UpdateProduct = ({match}) => {
                     price: data.price,
                     category: data.category,
                     stock: data.stock,
+                    photo: data.photo,
                     formData: new FormData()
                 });
             }
@@ -133,6 +134,7 @@ const UpdateProduct = ({match}) => {
             onClick={handleSubmit}
             />
         </form>
+        <Link to="/farmer/manage/product"><SubmitButton type="submit" value="BACK" /></Link>
         </div>
     );
 }
