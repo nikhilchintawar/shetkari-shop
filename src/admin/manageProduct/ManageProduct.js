@@ -44,14 +44,16 @@ const ManageProduct = ({match}) => {
          Hi <span className="userName">{firstName.toUpperCase()}</span>
         </div>
         <div className="manageProducts">
-            {
-                products.map((product, id) => {
+       
+            {            
+                   products.map((product, id) => {
                     return (
                         <div key={id} className="manageProduct">
                             <div>
                             {/* TODO: needed to fetch the image */}
-                            {/* <ImageHelper product={product} /> */}
+                            {/* <ImageHelper product={product._id} /> */}
                                 <h3 className="productName">{product.name}</h3>
+                              
                             </div>
 
                             {/* update and delete button */}

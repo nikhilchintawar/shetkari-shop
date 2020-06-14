@@ -14,6 +14,7 @@ const CloseButton = ({closeToast}) => (
 const SuccessMessage = (success, createdProduct) => {
     if(success){
         return toast(`${createdProduct} is created successfully.`, {
+            type:"success",
             toastId: "",
             className: "toast-class"
         })
@@ -23,6 +24,7 @@ const SuccessMessage = (success, createdProduct) => {
 const UpdateSuccessMessage = (success, createdProduct) => {
     if(success){
         return toast(`${createdProduct} is updated successfully.`, {
+            type:"success",
             toastId: "",
             className: "toast-class"
         })

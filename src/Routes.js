@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify';
 
 import SignIn from './user-authentication/signin/signin.component';
@@ -16,6 +17,8 @@ import AddProduct from "./admin/addProduct/AddProduct";
 import { CloseButton } from './admin/utils/utils';
 import ManageProduct from './admin/manageProduct/ManageProduct';
 import UpdateProduct from './admin/manageProduct/UpdateProduct';
+import UserRoute from './auth/helper/user-route';
+import Profile from './user/user-dashboard/Profile';
 
 
 function Routes() {
@@ -36,6 +39,7 @@ function Routes() {
     <AdminRoute path="/farmer/create/product" component={AddProduct} />
     <AdminRoute path="/farmer/manage/product" component={ManageProduct} />
     <AdminRoute path="/farmer/product/update/:productId" component={UpdateProduct} />
+    <UserRoute path="/user/profile" component={Profile} />
 
     <Route path="" component={NotFounnd} />    
     </Switch>

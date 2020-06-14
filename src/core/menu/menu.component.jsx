@@ -18,7 +18,6 @@ const currentTab = (history, path) => {
 
 
 const Menu = ({ history }) => {
-    
     return(
         <div className='header'>
         
@@ -49,12 +48,12 @@ const Menu = ({ history }) => {
             </li>
             </Fragment>
         )}
-        { isAuthenticated() && isAuthenticated().user.role === 0 && (
+        { isAuthenticated() && (
             <li>
                 <Link
-                    style={currentTab(history, "user/profile")}
+                    style={currentTab(history, "/user/profile")}
                     className="option"
-                    to="user/profile"
+                    to="/user/profile"
                     >
                         PROFILE
                     </Link>
