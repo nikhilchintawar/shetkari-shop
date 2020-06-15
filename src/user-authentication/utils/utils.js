@@ -3,6 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 import { isAuthenticated } from "../../auth/helper/auth-data";
 import "./utils.css";
 
+
 const {user} = isAuthenticated();
 
 
@@ -36,7 +37,7 @@ const loadingMessage = (loading) => {
         style={{ display: success ? "" : "none"}}   
         className="successMessage"    
         >
-        <span>New account is created successfully.
+        <span> 
         <Link to="/signin" className="span">Sign In </Link>Here.</span>
         </div>
         </div>

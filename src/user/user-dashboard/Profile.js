@@ -1,15 +1,16 @@
-import React from 'react';
-import "./profile.styles.css";
-import { isAuthenticated } from '../../auth/helper/auth-data';
-import { updateUser, deleteUser, getUser } from "../helper/userApiCall";
-import { Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import SubmitButton from '../../components/submit-button/submit-button.component';
-import InputField from '../../components/input/input.component';
+import "./profile.styles.css";
+import { isAuthenticated, signout } from '../../auth/helper/auth-data';
+import { updateUser, deleteUser, getUser } from "../helper/userApiCall";
+import updateUserForm from './UpdateUserForm';
+import { loadingMessage } from '../../user-authentication/utils/utils';
+import { UpdateSuccessMessage, errorMessage } from '../utils/utils';
+import { withRouter } from 'react-router-dom';
+import DeleteUserButton from './deleteThisUser';
 
-const Profile = () => {
+
+const Profile = ({history}) => {
     const { user, token } = isAuthenticated();
 
     const [values, setValues] = useState({
@@ -19,48 +20,52 @@ const Profile = () => {
         email: "",
         postalAddress: "",
         password: "",
+        role: "",
         success: false,
         loading: false,
-        error: ""
+        error: "",
+        formData: ""
     })
 
-    const {firstName, lastName, mobileNumber, email, postalAddress, password, success, error, loading} = values;
+    const {firstName, lastName, mobileNumber, email, postalAddress, password, role, success, error, loading} = values;
 
     
     
-    // const preload = (userId, token) => {
-    //    getUser(userId, token).then(data => {
-    //        if (data.error) {
-    //            console.log("ok lets try once again.")
-    //        }
-    //    })
-    // }
-
-    // useEffect(() => {
-    //     preload(user._id, user.token)
-    // }, [])
-
-    const deleteThisUser = () => {
-        console.log(token);
-        
-        deleteUser(user._id, token).then(data => {
-            console.log(data)
-            if(data.error){
-                console.log(data.error);
-            }else{              
-                return(<Redirect
-                            to="/signup"
-                       />)
+    const preload = (userId, token) => {
+       getUser(userId, token).then(data => {
+           if (data.error) {
+                setValues({...values, error: data.error, success: false, loading: false})
+            }else{
+                setValues({
+                    ...values, 
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    email: data.email,
+                    mobileNumber: data.mobileNumber,
+                    postalAddress: data.postalAddress,
+                    // password: data.password,
+                    role: data.role,
+                    formData: new FormData()
+                })
             }
-        })
+       })
     }
+
+    useEffect(() => {
+        preload(user._id, token)
+    }, [])
+
 
     const handleSubmit = event => {
         event.preventDefault();
-        setValues({...user, loading: true, error: ""});
+        setValues({...user, loading: true, error: "", success: false});
+        if(user.email === email && user.mobileNumber){
+            setValues({...user, loading: false, error: true, success: false});
+        }
 
         updateUser(user._id, token, user).then(data => {
             console.log(data)
+
             if(data.error){
                 setValues({...values, error: data.error, success: false})
             }else{
@@ -72,6 +77,7 @@ const Profile = () => {
                     email: "",
                     postalAddress: "",
                     password: "",
+                    role: "",
                     success: true,
                     loading: false
                 })
@@ -86,86 +92,45 @@ const Profile = () => {
                 [name]: value
         }))
     }
-
-    const updateUserForm = () => {
-        return (
-            <div className="form">
-            <form method="post" onSubmit={handleSubmit}>
-            <InputField
-            label="FirstName:"
-            type="text"
-            id="firstName"
-            name="firstName"
-            placeholder={user.firstName}
-            value={firstName}
-            handleChange={handleChange}
-            />
-            <InputField
-            label="LastName:"
-            type="text"
-            id="lastName"
-            name="lastName"
-            placeholder={user.lastName}
-            value={lastName}
-            handleChange={handleChange}
-            />
-            <InputField
-            label="Email:"
-            type="email"
-            id="email"
-            name="email"
-            placeholder={user.email}
-            value={email}
-            handleChange={handleChange}
-            />
-            <InputField
-            label="Mobile No.:"
-            type="tel"
-            id="tel"
-            name="mobileNumber"
-            placeholder={user.mobileNumber}
-            value={mobileNumber}
-            handleChange={handleChange}
-            />
-            <InputField
-            label="Address:"
-            type="text"
-            id="address"
-            name="postalAddress"
-            placeholder={user.postalAddress}
-            value={postalAddress}
-            handleChange={handleChange}
-            />
-            <InputField
-            label="Password:"
-            type="password"
-            id="password"
-            name="password"
-            placeholder="password"
-            value={password}
-            handleChange={handleChange}
-            />
-            <SubmitButton
-            value="UPDATE"
-            type="submit"
-            />
-            </form>
-            <SubmitButton
-            value="DELETE ACCOUNT"
-            type="submit"
-            onClick={deleteThisUser}
-            style={{backgroundColor: "#fff", color: "#ff0000", border: "1px solid #ff0000"}}
-            />
-            </div>
-        )
+//delete user
+    const deleteThisUser = () => {
+        deleteUser(user._id, token).then(data => {
+            console.log(data)
+            if(data.error){
+                console.log(data.error)
+                setValues({...values, error: data.error, success: false, loading: false})
+            }else{
+                return(signout(() => {
+                    history.push("/signup");
+                    toast("Your account is successfullly deleted", {
+                        type:"success",
+                        className: "toast-class"
+                    })
+                }))
+            }
+        })
     }
 
-
     return (
-        <div>
-            {updateUserForm()}
+        <div className="form">
+            {updateUserForm(
+                user, 
+                handleChange, 
+                handleSubmit, 
+                firstName, 
+                lastName, 
+                email, 
+                mobileNumber, 
+                postalAddress, 
+                role, 
+                deleteThisUser
+                )}
+            {loadingMessage(loading)}
+            {errorMessage(error)}
+            {UpdateSuccessMessage(success, user.firstName)}
+            <DeleteUserButton deleteThisUser={deleteThisUser} />
         </div>
     );
 };
 
-export default Profile;
+export default withRouter(Profile);
