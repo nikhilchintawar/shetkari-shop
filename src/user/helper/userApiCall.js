@@ -6,7 +6,7 @@ const getUser = (userId, token) => {
         method: "GET",
         headers: {
             Accept: "application/json",
-            // Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     })
     .then(response => response.json())

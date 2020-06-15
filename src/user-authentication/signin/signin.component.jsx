@@ -27,6 +27,7 @@ const SignIn = () => {
         setValue({ ...value, error: false, loading: true});
         await signin({ email, password })
             .then(data => {
+                console.log(data)
                 if(data === undefined){
                     setValue({...value, error: "Invalid email and password, please try again.", loading: false, didRedirect: false})
                 }

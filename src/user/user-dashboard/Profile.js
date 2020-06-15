@@ -10,7 +10,7 @@ import SubmitButton from '../../components/submit-button/submit-button.component
 import InputField from '../../components/input/input.component';
 
 const Profile = () => {
-    const { user } = isAuthenticated();
+    const { user, token } = isAuthenticated();
 
     const [values, setValues] = useState({
         firstName:"",
@@ -28,20 +28,26 @@ const Profile = () => {
 
     
     
-    const preload = (userId, token) => {
-        getUser(userId, token).then(data => console.log(data))
-    }
+    // const preload = (userId, token) => {
+    //    getUser(userId, token).then(data => {
+    //        if (data.error) {
+    //            console.log("ok lets try once again.")
+    //        }
+    //    })
+    // }
 
-    useEffect(() => {
-        preload()
-    }, [])
+    // useEffect(() => {
+    //     preload(user._id, user.token)
+    // }, [])
 
     const deleteThisUser = () => {
-        deleteUser(user._id, user.token).then(data => {
+        console.log(token);
+        
+        deleteUser(user._id, token).then(data => {
+            console.log(data)
             if(data.error){
                 console.log(data.error);
-            }else{
-                
+            }else{              
                 return(<Redirect
                             to="/signup"
                        />)
@@ -53,7 +59,7 @@ const Profile = () => {
         event.preventDefault();
         setValues({...user, loading: true, error: ""});
 
-        updateUser(user._id, user.token, user).then(data => {
+        updateUser(user._id, token, user).then(data => {
             console.log(data)
             if(data.error){
                 setValues({...values, error: data.error, success: false})
