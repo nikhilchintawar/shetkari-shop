@@ -11,7 +11,7 @@ import ManageOrderImage from "../../assets/orderImage.jpeg";
 
 
 const AdminDashBoard = () => {
-    const { user: { firstName }} = isAuthenticated();
+    const { user: { firstName, role }} = isAuthenticated();
 
     const adminFirstSection = () => {
         return (

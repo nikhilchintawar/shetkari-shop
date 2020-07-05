@@ -8,7 +8,7 @@ const ImageHelper = ({product}) => {
                     ? `${API}/product/photo/${product._id}`
                     : `../../assets/vegetables.jpg`
     console.log(imageUrl)
-  
+
     return (
         <div>
             <img

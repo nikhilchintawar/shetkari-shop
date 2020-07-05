@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import "./profile.styles.css";
 import { isAuthenticated, signout } from '../../auth/helper/auth-data';
-import { updateUser, deleteUser, getUser } from "../helper/userApiCall";
-import updateUserForm from './UpdateUserForm';
+import { updateUser, deleteUser } from "../helper/userApiCall";
 import { loadingMessage } from '../../user-authentication/utils/utils';
 import { UpdateSuccessMessage, errorMessage } from '../utils/utils';
 import { withRouter } from 'react-router-dom';
 import DeleteUserButton from './deleteThisUser';
+import UpdateUserForm from './UpdateUserForm';
 
 
 const Profile = ({history}) => {
@@ -24,51 +24,54 @@ const Profile = ({history}) => {
         success: false,
         loading: false,
         error: "",
-        formData: ""
+        newData: ""
     })
 
-    const {firstName, lastName, mobileNumber, email, postalAddress, password, role, success, error, loading} = values;
+    const {firstName, lastName, mobileNumber, email, postalAddress, role, success, error, loading} = values;
 
     
     
-    const preload = (userId, token) => {
-       getUser(userId, token).then(data => {
-           if (data.error) {
-                setValues({...values, error: data.error, success: false, loading: false})
-            }else{
+    const preload = () => {       
                 setValues({
                     ...values, 
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    email: data.email,
-                    mobileNumber: data.mobileNumber,
-                    postalAddress: data.postalAddress,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    mobileNumber: user.mobileNumber,
+                    postalAddress: user.postalAddress,
                     // password: data.password,
-                    role: data.role,
-                    formData: new FormData()
+                    role: user.role,
+                    newData: ""
                 })
             }
-       })
-    }
+       
+    
 
     useEffect(() => {
-        preload(user._id, token)
+        preload()
     }, [])
 
 
     const handleSubmit = event => {
         event.preventDefault();
         setValues({...user, loading: true, error: "", success: false});
-        if(user.email === email && user.mobileNumber){
-            setValues({...user, loading: false, error: true, success: false});
+
+        const newData = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            mobileNumber: mobileNumber,
+            postalAddress: postalAddress,
+            role: role
         }
+        console.log(newData)
 
-        updateUser(user._id, token, user).then(data => {
+        updateUser(user._id, token, newData).then(data => {
             console.log(data)
-
             if(data.error){
                 setValues({...values, error: data.error, success: false})
             }else{
+                console.log(data)
                 setValues({
                     ...values,
                     firstName:"",
@@ -87,6 +90,7 @@ const Profile = ({history}) => {
 
     const handleChange = (event) => {
         const {name, value} = event.target;
+       
         setValues(prevState => ({
             ...prevState,
                 [name]: value
@@ -111,23 +115,26 @@ const Profile = ({history}) => {
         })
     }
 
+    
+
     return (
         <div className="form">
-            {updateUserForm(
-                user, 
-                handleChange, 
-                handleSubmit, 
-                firstName, 
-                lastName, 
-                email, 
-                mobileNumber, 
-                postalAddress, 
-                role, 
-                deleteThisUser
-                )}
+
+            <UpdateUserForm 
+            user={user} 
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
+            mobileNumber={mobileNumber}
+            postalAddress={postalAddress}
+            role={role}
+            />
+
             {loadingMessage(loading)}
-            {errorMessage(error)}
-            {UpdateSuccessMessage(success, user.firstName)}
+            {/* {errorMessage(error)} */}
+            {/* {UpdateSuccessMessage(success, user.firstName)} */}
             <DeleteUserButton deleteThisUser={deleteThisUser} />
         </div>
     );

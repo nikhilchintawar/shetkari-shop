@@ -1,21 +1,22 @@
 import {API} from "../../backend";
 
 
-const getUser = (userId, token) => {
-    return fetch(`${API}/user/${userId}`, {
-        method: "GET",
-        headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${token}`
-        }
-    })
-    .then(response => response.json())
-    .catch(error => console.log(error))
-} 
+// const getUser = (userId, token) => {
+//     return fetch(`${API}/user/${userId}`, {
+//         method: "GET",
+//         headers: {
+//             Accept: "application/json",
+//             Authorization: `Bearer ${token}`
+//         }
+//     })
+//     .then(response => response.json())
+//     .catch(error => console.log(error))
+// } 
 
-const updateUser = async(userId, token, user) => {
+const updateUser = (userId, token, user) => {
     return fetch(`${API}/user/${userId}`, {
         method: "PUT",
+        mode: "cors",
         headers: {
             Accept: "application/json",
             Authorization: `Bearer ${token}`
@@ -36,4 +37,4 @@ const deleteUser = (userId, token) => {
     })
 }
 
-export {updateUser, deleteUser, getUser}
+export {updateUser, deleteUser}

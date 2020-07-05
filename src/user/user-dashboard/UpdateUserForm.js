@@ -5,8 +5,8 @@ import SubmitButton from "../../components/submit-button/submit-button.component
 
 
 
-const updateUserForm = (
-    user, 
+const UpdateUserForm = (
+    {user, 
     handleChange, 
     handleSubmit, 
     firstName, 
@@ -14,13 +14,12 @@ const updateUserForm = (
     email,
     mobileNumber,  
     postalAddress,
-    role,
-    password
+    role}
     ) => {
     return (
         <div>
         <span>Update Your Profile Here.</span>
-        <form method="post" onSubmit={handleSubmit}>
+        <form method="post">
         <InputField
         label="FirstName:"
         type="text"
@@ -70,7 +69,7 @@ const updateUserForm = (
             user.role === 1 
             ?
             <InputField
-            label="Role"
+            label="Role:"
             type="number"
             id="role"
             name="role"
@@ -80,7 +79,7 @@ const updateUserForm = (
             />
             :
             <InputField
-            label="Role"
+            label="Role:"
             type="number"
             id="role"
             name="role"
@@ -103,6 +102,7 @@ const updateUserForm = (
         <SubmitButton
         value="UPDATE"
         type="submit"
+        onClick={handleSubmit}
         />
         </form>
         
@@ -110,4 +110,4 @@ const updateUserForm = (
     )
 }
 
-export default updateUserForm;
+export default UpdateUserForm;

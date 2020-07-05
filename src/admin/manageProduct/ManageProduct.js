@@ -10,7 +10,7 @@ import ImageHelper from '../helper/ImageHelper';
 const ManageProduct = ({match}) => {
     const [products, setProducts] = useState([]);
 
-    const { user: {_id: id, firstName}, token } = isAuthenticated();
+    const { user, token } = isAuthenticated();
 
     const preload = () => {
         getAllProducts().then(data => {
@@ -28,7 +28,7 @@ const ManageProduct = ({match}) => {
     }, [])
 
     const deleteThisProduct = (productId) => {
-        deleteProduct(productId, id, token).then(data => {
+        deleteProduct(productId, user._id, token).then(data => {
             if(data.error){
                 console.log(data.error);
                 
@@ -41,19 +41,21 @@ const ManageProduct = ({match}) => {
     return (
         <div>
         <div className="createProductTitle">
-         Hi <span className="userName">{firstName.toUpperCase()}</span>
+         Hi <span className="userName">{user.firstName.toUpperCase()}</span>
         </div>
         <div className="manageProducts">
        
             {            
                    products.map((product, id) => {
+                    
                     return (
                         <div key={id} className="manageProduct">
                             <div>
                             {/* TODO: needed to fetch the image */}
-                            {/* <ImageHelper product={product._id} /> */}
+                            <img src={product.photo.data} alt="shet" />
+                            {/* <ImageHelper product={product} /> */}
                                 <h3 className="productName">{product.name}</h3>
-                              
+                           
                             </div>
 
                             {/* update and delete button */}

@@ -8,8 +8,8 @@ import { loadingMessage, errorMessage } from '../../user-authentication/utils/ut
 import { UpdateSuccessMessage } from "../utils/utils";
 
 const UpdateProduct = ({match}) => {
-    const { user: {_id: id, firstName}, token} = isAuthenticated();
-
+    const { user: {_id: id, firstName, role}, token} = isAuthenticated();
+    
     const [values, setValues] = useState({
         name: "",
         description: "",
@@ -53,8 +53,9 @@ const UpdateProduct = ({match}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setValues({ ...values, error: "", loading: true});
-
-        updateProduct(match.params.productId,id, token, formData).then(data => {
+       console.log(match.params.productId)
+        updateProduct(match.params.productId, id, token, formData).then(data => {
+            console.log(data)
             if(data.error){
                 setValues({...values, error: data.error, success: false})
             }else{

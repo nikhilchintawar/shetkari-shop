@@ -8,7 +8,7 @@ const createProduct = (userId, token, product) => {
         method:"POST",
         headers:{
             Accept:"application/json",
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
         },
         body: product
     })
@@ -42,6 +42,7 @@ const getProduct = productId => {
 const updateProduct = (productId, userId, token, product) => {
     return fetch(`${API}/user/${userId}/product/${productId}`, {
         method: "PUT",
+        mode: "cors",
         headers: {
             Accept: "application/json",
             Authorization: `Bearer ${token}`
@@ -49,8 +50,7 @@ const updateProduct = (productId, userId, token, product) => {
         body: product
     })
     .then(response => response.json())
-    .catch(error => console.log(error)
-    )
+    .catch(error => console.log(error))
 }
 
 //delete product

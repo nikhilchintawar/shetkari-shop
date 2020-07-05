@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import InputField from "../../components/input/input.component";
 import SubmitButton from "../../components/submit-button/submit-button.component";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { signin, authenticate } from "../../auth/helper/auth-data";
 import { performRedirect, loadingMessage, errorMessage } from "../utils/utils";
 
+import queryString from "query-string";
 
-const SignIn = () => {
+const SignIn = ({location, history}) => {
     const [value, setValue] = useState({
         email: "",
         password:"",
@@ -45,9 +46,22 @@ const SignIn = () => {
             .catch(err => console.log("sign in failed"))
     }
     const {email, password, didRedirect, loading, error} = value
+   
+    const signInWithGoogle = () => {
+    // authenticate(location.search, () =>  {
+    //     console.log(location)
+    //     setValue({
+    //         ...value,
+    //         didRedirect: true
+    //     })     
+    // })
+    var query = queryString.parse(location.search);
+    if (query.token) {
+      window.localStorage.setItem("jwt", query.token);
+      history.push("/");
+   }
 
-    
-
+    }
 const SignInForm = () => {
     return(
         <div className="form signin">
@@ -74,6 +88,7 @@ const SignInForm = () => {
         type="submit"
         value="SIGN IN"
         />
+        <Link to="/auth/google" onClick={signInWithGoogle}>Google</Link>
         </form>
         <span>I don't have an account, then <Link to='/signup'>sign up</Link> here.</span>
         </div>
@@ -92,4 +107,4 @@ return(
 
 
 
-export default SignIn;
+export default withRouter(SignIn);

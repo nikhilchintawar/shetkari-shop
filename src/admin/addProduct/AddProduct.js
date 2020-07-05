@@ -39,8 +39,9 @@ const AddProduct = () => {
         setValues({...values, error: "", loading: true })
         
         await createProduct(id, token, formData).then(data => {
+            console.log(data);
+            
             if(data.error){
-                console.log(data.error)
                 setValues({ ...values, error: data.error, success: false })
             }else{
                 setValues({
@@ -54,7 +55,7 @@ const AddProduct = () => {
                     loading: false,
                     success: true,
                     error:"",
-                    createdProduct: data.name
+                    createdProduct: data?.name
                 });
             }
         })
