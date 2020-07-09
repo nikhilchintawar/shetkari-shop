@@ -4,8 +4,35 @@
     padding: 1rem;
 }
 
+.vegetables{
+    padding-top: 1rem;
+}
+
 .productCategory{
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    height: 35vh;
+    column-gap: 1.5rem;
+    margin: 1rem;
+}
+
+.collection-footer {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+.custom-button{
+    width: 80%;
+    opacity: 0.7;
+    position: absolute;
+    top: 255px;
+  }
+
+.image:hover{
+    opacity: 0.85;
+   
 }

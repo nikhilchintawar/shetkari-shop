@@ -25,18 +25,14 @@ const ProductCard = ({
         }
     };
 
+    //TODO: needed to work on produc card
     return(
         <div className="productCard">
         <div className="productCardHeader">
-            <span className="productTitle">{product.name}</span>
-            <span className="productPrice">$ {product.price}</span>
+            {/* <span className="productTitle">{product.name}</span>
+            <span className="productPrice">$ {product.price}</span> */}
         </div>    
             {getARedirect(redirect)}
-            <SubmitButton 
-                type="submit"
-                value="Add To Cart"
-                onClick={addToCart}
-            />
         </div>
     )
 };
