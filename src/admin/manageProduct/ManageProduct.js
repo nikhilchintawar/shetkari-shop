@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { FaUserEdit, FaTrash } from "react-icons/fa"
 import { isAuthenticated } from '../../auth/helper/auth-data';
 import { getAllProducts, deleteProduct } from '../helper/adminApiCall';
+import { API } from '../../backend';
+
 
 import "./manage-product.styles.css";
-import ImageHelper from '../helper/ImageHelper';
 
 const ManageProduct = ({match}) => {
     const [products, setProducts] = useState([]);
@@ -47,17 +48,17 @@ const ManageProduct = ({match}) => {
        
             {            
                    products.map((product, id) => {
-                    
+
+                    const imageUrl = product 
+                    ? `${API}/product/photo/${product._id}`
+                    : `../../assets/vegetables.jpg`
+
                     return (
                         <div key={id} className="manageProduct">
-                            <div>
-                            {/* TODO: needed to fetch the image */}
-                            <img src={product.photo.data} alt="shet" />
-                            {/* <ImageHelper product={product} /> */}
-                                <h3 className="productName">{product.name}</h3>
-                           
-                            </div>
+                            <div className="image" style={{backgroundImage: `url(${imageUrl})`}}>
 
+                            <h3 className="productName">{product.name}</h3>    
+                            <p>AVAILABLE STOCK: {product.stock} kg</p>
                             {/* update and delete button */}
                             <div className="updateAndDeleteButton">
                             <div>
@@ -78,6 +79,7 @@ const ManageProduct = ({match}) => {
                                 </button>
                             </div>
                             </div>
+                        </div>
                         </div>
                     )
                 })

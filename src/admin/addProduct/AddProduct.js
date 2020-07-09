@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { createProduct } from "../helper/adminApiCall";
 import { isAuthenticated } from "../../auth/helper/auth-data";
 import InputField from "../../components/input/input.component";
@@ -59,6 +59,12 @@ const AddProduct = () => {
                 });
             }
         })
+    }
+
+    const redirect = () => {
+        if(success){
+            return <Redirect to="/farmer/manage/product" />
+        }
     }
 
     const handleChange = name => event => {
@@ -133,6 +139,7 @@ return (
         {loadingMessage(loading)}
         {errorMessage(error)}
         {SuccessMessage(success, createdProduct)}
+        {redirect()}
         {createProductForm()}
     </div>
 )
