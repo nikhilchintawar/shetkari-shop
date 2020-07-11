@@ -20,6 +20,8 @@ import UpdateProduct from './admin/manageProduct/UpdateProduct';
 import UserRoute from './auth/helper/user-route';
 import Profile from './user/user-dashboard/Profile';
 import Shop from './pages/shop/Shop';
+import Vegetable from './pages/vegetable/Vegetable';
+import Grain from './pages/grain/Grain';
 
 
 function Routes() {
@@ -37,6 +39,8 @@ function Routes() {
     <Route path="/signin" component={SignIn} />
     <Route path="/contact" component={ContactForm} />
     <Route path="/shop" component={Shop} />
+    <Route path="/vegetables" component={Vegetable} />
+    <Route path="/grains" component={Grain} />
     <AdminRoute exact path="/farmer/dashboard" component={AdminDashBoard} />
     <AdminRoute path="/farmer/create/product" component={AddProduct} />
     <AdminRoute path="/farmer/manage/product" component={ManageProduct} />
