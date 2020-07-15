@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import { API } from '../../backend';
-import CustomButton from '../../components/custom-button/CustomButton';
-
 
 import "./shop.css";
-import { addToCart, getRedirect, preload } from './utils';
+import { preload } from './utils';
+import Card from './Card';
 
-const ShopPage = ({product, category}) => {
+const ShopPage = ({category}) => {
 
     const [products, setProducts] = useState([]);
-    const [redirect, setRedirect] = useState(false);
+    const [reload, setReload] = useState(false)
 
     useEffect(() => {
         preload(setProducts)
@@ -25,18 +24,15 @@ const ShopPage = ({product, category}) => {
 
                    if(product.category === category){
                        return(
-                           <div key={product._id} >
-                            <div className="image" style={{backgroundImage: `url(${imageUrl})`}} />
-                            <span className="add-to-cart">
-                                <CustomButton onClick={() => addToCart(product, setRedirect)}>Add To Cart</CustomButton>
-                                {getRedirect(redirect)}
-                            </span>
-                                                  
-                            <div className="collection-footer">
-                                <span className="name">{product.name}</span>
-                                <span className="price">{product.price} RS/KG</span>
-                            </div>                            
-                           </div>
+                           <Card 
+                           key={product._id}
+                           product={product}
+                           imageUrl={imageUrl}
+                           removeFromCart={false}
+                           addToCart={true}
+                           setReload= {setReload}
+                           reload={reload}
+                           />
                        )
                    } else{
                        return(

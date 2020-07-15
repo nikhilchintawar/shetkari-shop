@@ -22,6 +22,7 @@ import Profile from './user/user-dashboard/Profile';
 import Shop from './pages/shop/Shop';
 import Vegetable from './pages/vegetable/Vegetable';
 import Grain from './pages/grain/Grain';
+import Cart from './order/Cart';
 
 
 function Routes() {
@@ -46,6 +47,7 @@ function Routes() {
     <AdminRoute path="/farmer/manage/product" component={ManageProduct} />
     <AdminRoute path="/farmer/product/update/:productId" component={UpdateProduct} />
     <UserRoute path="/user/profile" component={Profile} />
+    <UserRoute path="/user/cart" component={Cart} />
 
     <Route path="" component={NotFounnd} />    
     </Switch>

@@ -74,11 +74,14 @@ const Menu = ({ history }) => {
                 SHOP
             </Link>
             </li>
+            {   
+                isAuthenticated() && (
            <li>
-            <Link className='option' to='/cart'>
+            <Link className='option' to='/user/cart'>
                 <Cart className="cart" />
             </Link>
            </li>
+                )}
         
         </ul>
         </div>
