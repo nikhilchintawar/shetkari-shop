@@ -55,7 +55,7 @@ const SignIn = ({location, history}) => {
     //         didRedirect: true
     //     })     
     // })
-    var query = queryString.parse(location.search);
+    let query = queryString.parse(location.search);
     if (query.token) {
       window.localStorage.setItem("jwt", query.token);
       history.push("/");

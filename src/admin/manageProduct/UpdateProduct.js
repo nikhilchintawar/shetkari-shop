@@ -53,9 +53,10 @@ const UpdateProduct = ({match}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setValues({ ...values, error: "", loading: true});
-       console.log(match.params.productId)
+    //    console.log(match.params.productId)
+    
         updateProduct(match.params.productId, id, token, formData).then(data => {
-            console.log(data)
+            // console.log(data)
             if(data.error){
                 setValues({...values, error: data.error, success: false})
             }else{

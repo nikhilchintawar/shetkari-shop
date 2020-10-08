@@ -10,9 +10,14 @@ import { isAuthenticated } from '../../auth/helper/auth-data';
 
 const currentTab = (history, path) => {
     if (history.location.pathname === path) {
-      return { color: "#ffffff" };
+      return { 
+          color: "#ffffff",
+          backgroundColor: "#000000",
+          padding: "10px",
+          borderRadius: "5px"
+         };
     } else {
-      return { color: "#800080" };
+      return { color: "#000000" };
     }
   };
 
@@ -51,9 +56,9 @@ const Menu = ({ history }) => {
         { isAuthenticated() && (
             <li>
                 <Link
-                    style={currentTab(history, "/user/profile")}
+                    style={currentTab(history, "/user/profile/:userId")}
                     className="option"
-                    to="/user/profile"
+                    to={`/user/profile/${isAuthenticated().user._id}`}
                     >
                         PROFILE
                     </Link>

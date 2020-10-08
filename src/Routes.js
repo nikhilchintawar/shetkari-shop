@@ -46,7 +46,7 @@ function Routes() {
     <AdminRoute path="/farmer/create/product" component={AddProduct} />
     <AdminRoute path="/farmer/manage/product" component={ManageProduct} />
     <AdminRoute path="/farmer/product/update/:productId" component={UpdateProduct} />
-    <UserRoute path="/user/profile" component={Profile} />
+    <UserRoute path="/user/profile/:userId" component={Profile} />
     <UserRoute path="/user/cart" component={Cart} />
 
     <Route path="" component={NotFounnd} />    

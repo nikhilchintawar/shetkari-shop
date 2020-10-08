@@ -1,0 +1,21 @@
+.checkout-card{
+    width: 25%;
+    margin: 2rem;
+}
+
+.stripe-checkout{
+    margin: 2rem;
+    text-align: right;
+}
+.title{
+    text-align: center;
+}
+@media screen and (max-width: 600px){
+    .checkout-card{
+        width: 80%;
+    }
+    .image{
+        width: 80%;
+        height: 40%;
+    }
+}

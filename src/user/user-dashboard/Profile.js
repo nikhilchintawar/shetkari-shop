@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
+
 import "./profile.styles.css";
-import { isAuthenticated, signout } from '../../auth/helper/auth-data';
-import { updateUser, deleteUser } from "../helper/userApiCall";
+import { isAuthenticated } from '../../auth/helper/auth-data';
+import { updateUser, getUser } from "../helper/userApiCall";
 import { loadingMessage } from '../../user-authentication/utils/utils';
 import { UpdateSuccessMessage, errorMessage } from '../utils/utils';
-import { withRouter } from 'react-router-dom';
-import DeleteUserButton from './deleteThisUser';
+import DeleteUserButton from './DeleteUserButton';
 import UpdateUserForm from './UpdateUserForm';
-
+import InputField from "../../components/input/input.component";
+import SubmitButton from "../../components/submit-button/submit-button.component";
 
 const Profile = ({history}) => {
     const { user, token } = isAuthenticated();
@@ -23,38 +24,41 @@ const Profile = ({history}) => {
         role: "",
         success: false,
         loading: false,
-        error: "",
-        newData: ""
+        error: ""
     })
 
     const {firstName, lastName, mobileNumber, email, postalAddress, role, success, error, loading} = values;
 
-    
-    
-    const preload = () => {       
-                setValues({
-                    ...values, 
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email,
-                    mobileNumber: user.mobileNumber,
-                    postalAddress: user.postalAddress,
-                    // password: data.password,
-                    role: user.role,
-                    newData: ""
-                })
-            }
-       
-    
-
     useEffect(() => {
-        preload()
+        const preload = (userId, token) => {    
+            getUser(userId, token).then(data => {
+                console.log(data);
+                
+                if(data?.error){
+                    setValues({...values, error: data.error, success: false });
+                }else{
+                    setValues({
+                        ...values, 
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                        email: data.email,
+                        mobileNumber: data.mobileNumber,
+                        postalAddress: data.postalAddress,
+                        // password: data.password,
+                        role: data.role
+                        
+                    })
+                }
+            })
+        }
+
+        preload(user._id, token)
     }, [])
 
 
     const handleSubmit = event => {
         event.preventDefault();
-        setValues({...user, loading: true, error: "", success: false});
+        setValues({...values, loading: true, error: "", success: false});
 
         const newData = {
             firstName: firstName,
@@ -64,7 +68,6 @@ const Profile = ({history}) => {
             postalAddress: postalAddress,
             role: role
         }
-        console.log(newData)
 
         updateUser(user._id, token, newData).then(data => {
             console.log(data)
@@ -88,31 +91,107 @@ const Profile = ({history}) => {
         })
     }
 
-    const handleChange = (event) => {
-        const {name, value} = event.target;
-       
-        setValues(prevState => ({
-            ...prevState,
-                [name]: value
-        }))
+    const handleChange = name => (event) => {
+        const {value} = event.target;
+        setValues({ ...values, [name]: value });
     }
 //delete user
-    const deleteThisUser = () => {
-        deleteUser(user._id, token).then(data => {
-            console.log(data)
-            if(data.error){
-                console.log(data.error)
-                setValues({...values, error: data.error, success: false, loading: false})
-            }else{
-                return(signout(() => {
-                    history.push("/signup");
-                    toast("Your account is successfullly deleted", {
-                        type:"success",
-                        className: "toast-class"
-                    })
-                }))
+
+
+    const createUpdateForm = () => {
+        return (
+            <div>
+            <span>Update Your Profile Here.</span>
+            <form method="post">
+            <InputField
+            label="FirstName:"
+            type="text"
+            id="firstName"
+            name="firstName"
+            placeholder={user.firstName}
+            value={firstName}
+            handleChange={handleChange("firstName")}
+            />
+            <InputField
+            label="LastName:"
+            type="text"
+            id="lastName"
+            name="lastName"
+            placeholder={user.lastName}
+            value={lastName}
+            handleChange={handleChange("lastName")}
+            />
+            <InputField
+            label="Email:"
+            type="email"
+            id="email"
+            name="email"
+            placeholder={user.email}
+            value={email}
+            handleChange={handleChange("email")}
+            />
+            <InputField
+            label="Mobile No.:"
+            type="tel"
+            id="tel"
+            name="mobileNumber"
+            placeholder={user.mobileNumber}
+            value={mobileNumber}
+            handleChange={handleChange("mobileNumber")}
+            />
+            <InputField
+            label="Address:"
+            type="text"
+            id="address"
+            name="postalAddress"
+            placeholder={user.postalAddress}
+            value={postalAddress}
+            handleChange={handleChange("postalAddress")}
+            />
+            {
+                user.role === 1 
+                ?
+                <InputField
+                label="Role:"
+                type="number"
+                id="role"
+                name="role"
+                placeholder={`don't want to be an authorized seller any more put 0 in input and if you want to continue then put 1.`}
+                value={role}
+                handleChange={handleChange("role")}
+                />
+                :
+                <InputField
+                label="Role:"
+                type="number"
+                id="role"
+                name="role"
+                placeholder={`Insert 1 if you want to be authorized seller.YOUR ROLE:-{user.role}`}
+                value={role}
+                handleChange={handleChange("role")}
+                />
+    
             }
-        })
+    
+            {/* <InputField
+            label="Password:"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="password"
+            value={password}
+            handleChange={handleChange}
+            /> */}
+            <SubmitButton
+            value="UPDATE"
+            type="submit"
+            onClick={handleSubmit}
+            />
+            </form>
+            
+            </div>
+    
+        )
     }
 
     
@@ -120,7 +199,7 @@ const Profile = ({history}) => {
     return (
         <div className="form">
 
-            <UpdateUserForm 
+            {/* <UpdateUserForm 
             user={user} 
             handleChange={handleChange}
             handleSubmit={handleSubmit}
@@ -130,12 +209,13 @@ const Profile = ({history}) => {
             mobileNumber={mobileNumber}
             postalAddress={postalAddress}
             role={role}
-            />
-
+            /> */}
+      
+            {createUpdateForm()}
             {loadingMessage(loading)}
             {/* {errorMessage(error)} */}
             {/* {UpdateSuccessMessage(success, user.firstName)} */}
-            <DeleteUserButton deleteThisUser={deleteThisUser} />
+            <DeleteUserButton history={history} />
         </div>
     );
 };

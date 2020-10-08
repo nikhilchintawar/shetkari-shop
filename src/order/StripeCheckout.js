@@ -35,7 +35,8 @@ const StripeCheckout = ({products, setReload = f => f, reload = undefined}) => {
             name="ORDER"
             shippingAddress
             billingAddress
-            >Pay With Stripe</StripeCheckoutButton>
+            label="Pay Here"
+            />
         ) : (
             <Link to="/signin"><CustomButton type="button">SignIn Here.</CustomButton></Link>
         )
@@ -43,7 +44,6 @@ const StripeCheckout = ({products, setReload = f => f, reload = undefined}) => {
 
     return (
         <div>
-        <h3>Stripe Checkout</h3>
         {showStripeButton()}            
         </div>
     );

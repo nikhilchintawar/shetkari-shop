@@ -36,3 +36,17 @@
     margin-top: -3.15rem;
     opacity: 0.5;
 }
+
+@media screen and (max-width: 600px){
+   .productCategory{
+       display: grid;
+       grid-template-columns: 1fr;
+       row-gap: 3rem;
+       margin: 0px auto;
+       width: 100;
+   }
+   .image{
+       height: 40vh;
+       border-radius: 0.5rem;
+   }
+}

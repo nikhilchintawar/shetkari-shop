@@ -1,4 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.signup-page{
+   display: flex;
+   justify-content: space-between;
+   align-items: stretch;
+   background-image: url("./../../assets/shetkari-signup-bg.jpg");
+   background-position: center;
+   background-size: cover;
+   opacity: 0.7;
+}
+
+.welcome-part{
+   width: 70%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   line-height: 0;
+   transform: rotate(-25deg);
+}
+.signup-title{
+   color: #ffffff;
+   font-family: 'Lobster', cursive;
+   font-size: 5rem;
+}
+
+.welcome-message{
+   color: #ffffff;
+}
+.signup-form{
+   width: 100%;
+   display: flex;
+   justify-content: flex-end;
+   padding: 2rem;
+}
+
+.signup{
+   width: 70%;
+   background-color: #598216;
+   opacity: 0.7;
+   padding: 2rem;
+   border-radius: 5px;
+}
+
 span{
    font-weight: 500;
-   color: #800080;
+   color: #000000;
 }

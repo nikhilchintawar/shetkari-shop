@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import './signup.styles.css'
 import InputField from "../../components/input/input.component";
 import SubmitButton from '../../components/submit-button/submit-button.component';
-import { Link } from 'react-router-dom';
-
 import { signup } from "../../auth/helper/auth-data";
 import { successMessage ,errorMessage } from "../utils/utils";
 
@@ -62,7 +62,7 @@ const SignUp = () => {
 
     const signUpForm = () => {
     return(
-    <div className="form">
+    <div className="signup">
     <span>I already have an account, then <Link to='/signin'>sign in</Link> here.</span>
         <form method="post" onSubmit={handleSubmit}>
         <InputField
@@ -139,11 +139,16 @@ const SignUp = () => {
 
 
 return (
-    <div>
-    {successMessage(success)}
-    {errorMessage(error)}
-    {signUpForm()}
-  
+    <div className="signup-page">
+        <div className="welcome-part">
+            <h1 className="signup-title">Shetkari Shop</h1>
+            <h2 className="welcome-message">Home For Farmers.</h2>
+        </div>
+        <div className="signup-form">
+        {successMessage(success)}
+        {errorMessage(error)}
+        {signUpForm()}  
+        </div>
     </div>
 )
 }

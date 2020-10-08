@@ -16,7 +16,7 @@ const AdminDashBoard = () => {
     const adminFirstSection = () => {
         return (
             <div className="adminFirstSection" >
-                <div >
+                <div>
                     <ul>
                         <li>
                         <Link 

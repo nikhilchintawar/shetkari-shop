@@ -4,6 +4,7 @@ import { loadCart } from '../pages/helper/cartHelper';
 import StripeCheckout from './StripeCheckout';
 import ImageHelper from '../admin/helper/imageHelper';
 
+import "./cart.css";
 
 const Cart = () => {
 
@@ -19,9 +20,9 @@ const Cart = () => {
 
         return (
             <div>
-                <h2>This section is to load products</h2>
+                <h2 className="title">Checkout Page</h2>
                 {products.map((product, index) => (
-                    <div key={product._id}>
+                    <div className="checkout-card" key={product._id}>
                     <ImageHelper product={product} />
                     <Card 
                     key={index}
@@ -40,11 +41,11 @@ const Cart = () => {
     return (
         <div>
             <div>{loadAllProducts()}</div>
-            <div>
+            <div className="stripe-checkout">
             <StripeCheckout
             products={products}
             setReload={setReload}
-            /> </div>
+            /></div>
         </div>
     );
 };
