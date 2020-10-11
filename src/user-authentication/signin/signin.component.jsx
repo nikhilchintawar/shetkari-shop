@@ -1,11 +1,13 @@
 import React, {useState} from "react";
+
+import "./signin.styles.css";
 import InputField from "../../components/input/input.component";
 import SubmitButton from "../../components/submit-button/submit-button.component";
 import { Link, withRouter } from "react-router-dom";
 import { signin, authenticate } from "../../auth/helper/auth-data";
 import { performRedirect, loadingMessage, errorMessage } from "../utils/utils";
 
-import queryString from "query-string";
+// import queryString from "query-string";
 
 const SignIn = ({location, history}) => {
     const [value, setValue] = useState({
@@ -47,24 +49,24 @@ const SignIn = ({location, history}) => {
     }
     const {email, password, didRedirect, loading, error} = value
    
-    const signInWithGoogle = () => {
-    // authenticate(location.search, () =>  {
-    //     console.log(location)
-    //     setValue({
-    //         ...value,
-    //         didRedirect: true
-    //     })     
-    // })
-    let query = queryString.parse(location.search);
-    if (query.token) {
-      window.localStorage.setItem("jwt", query.token);
-      history.push("/");
-   }
+//     const signInWithGoogle = () => {
+//     // authenticate(location.search, () =>  {
+//     //     console.log(location)
+//     //     setValue({
+//     //         ...value,
+//     //         didRedirect: true
+//     //     })     
+//     // })
+//     let query = queryString.parse(location.search);
+//     if (query.token) {
+//       window.localStorage.setItem("jwt", query.token);
+//       history.push("/");
+//    }
 
-    }
+//     }
 const SignInForm = () => {
     return(
-        <div className="form signin">
+        <div className="signin-form">
         <form method="post" onSubmit={handleSubmit}>
         <InputField
         label="Email:"
@@ -88,19 +90,25 @@ const SignInForm = () => {
         type="submit"
         value="SIGN IN"
         />
-        <Link to="/auth/google" onClick={signInWithGoogle}>Google</Link>
+        {/* <Link to="/auth/google" onClick={signInWithGoogle}>Google</Link> */}
         </form>
-        <span>I don't have an account, then <Link to='/signup'>sign up</Link> here.</span>
         </div>
     );
 }
 
 return(
-    <div>
-    {loadingMessage(loading)}
-    {errorMessage(error)}
-    {SignInForm()}
-    {performRedirect(didRedirect)}
+    <div className="signin-page">
+    <div className="signin-welcome">
+        <h1>Welecome Back</h1>
+        <p className="signin-link">I don't have an account, then</p>
+        <button className="signin-link-button"><Link to='/signup'>sign up</Link></button>
+    </div>
+    <div className="signin">
+        {loadingMessage(loading)}
+        {errorMessage(error)}
+        {SignInForm()}
+        {performRedirect(didRedirect)}
+    </div>
     </div>
 )
     }

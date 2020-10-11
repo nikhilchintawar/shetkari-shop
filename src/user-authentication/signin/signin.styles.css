@@ -1,0 +1,43 @@
+.signin-page{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.5rem;
+}
+
+.signin-link{
+    color: #000000;
+}
+
+.signin-welcome{
+    height: 100vh;
+    background-color: #3aaf9f;
+    text-align: center;
+    border-radius: 0px 5px 5px 0px;
+}
+h1{
+    margin-top: 25%;
+}
+
+.signin-link-button{
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    border: none;
+    color: #000000;
+}
+
+.signin-link-button:hover{
+    background-color: #000000;
+    color: #3aaf9f;
+}
+
+a{
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.signin{
+    width: 75%;
+    margin-left: 3.5rem;
+    margin-top: 25%;
+}

@@ -18,6 +18,7 @@
    align-items: center;
    line-height: 0;
    transform: rotate(-25deg);
+   margin-top: -15rem;
 }
 .signup-title{
    color: #ffffff;
@@ -38,12 +39,11 @@
 .signup{
    width: 70%;
    background-color: #598216;
-   opacity: 0.7;
    padding: 2rem;
    border-radius: 5px;
 }
 
 span{
    font-weight: 500;
-   color: #000000;
+   color: #ffffff;
 }
