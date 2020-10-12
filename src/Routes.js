@@ -22,7 +22,7 @@ import Profile from './user/user-dashboard/Profile';
 import Shop from './pages/shop/Shop';
 import Vegetable from './pages/vegetable/Vegetable';
 import Grain from './pages/grain/Grain';
-import Cart from './order/Cart';
+import Cart from './pages/cart/Cart';
 
 
 function Routes() {
