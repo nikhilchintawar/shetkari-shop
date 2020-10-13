@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './cart.styles.css';
 import { loadCart } from './../helper/cartHelper';
 import CartItem from "./../../components/cartitem/CartItem";
+import StripeCheckout from '../../order/StripeCheckout';
 
 
 const Cart = () => {
@@ -14,31 +15,48 @@ const Cart = () => {
         setProducts(loadCart());
     }, [reload])
 
-    const loadAllProducts = (products) => {
-        return (
-            <div>
-                {
-                    products.map((product, index) => (
-                        <CartItem 
-                            key={index} 
-                            product={product}
-                            reload={reload}
-                            setReload={setReload} />
-                    ))
-                }
-            </div>
-        )
-    }
-
 
     return (
         
-            <div className="row text-center">
-                <div className="col-5 carItems">
-                    {products.length > 0 ? loadAllProducts(products) : <h4>No products</h4>}
+            <div className="checkout-page">
+                <div className='checkout-header'>
+                    <div className='header-block'>
+                        <span>Product</span>
+                    </div>
+                    <div className='header-block'>
+                        <span>Description</span>
+                    </div>
+                    <div className='header-block'>
+                        <span>Quantity</span>
+                    </div>
+                    <div className='header-block'>
+                        <span>Price</span>
+                    </div>
+                    <div className='header-block'>
+                        <span>Remove</span>
+                    </div>
                 </div>
-                <div className="col-5">
-                    {/* {products.length > 0 ? <PaymentB products={products} setReload={setReload} /> : <h3>Please login or something in cart.</h3>} */}
+
+                        {
+                        products.map((product, index) => (
+                            <CartItem 
+                                key={index} 
+                                product={product}
+                                reload={reload}
+                                setReload={setReload} />
+                        ))
+                        }
+                    {products.length > 0 ? 
+                        ''  
+                     : <h4>No products</h4>}
+
+                <div>
+                    {products.length > 0 ? 
+                    <StripeCheckout 
+                        products={products}
+                        setReload={setReload}
+                    />
+                     : <h3>Please login or add something in cart.</h3>}
                     <div className='test-warning'>
                         *Please use the following test credit card for payments*
                         <br />

@@ -1,16 +1,18 @@
 import React from 'react';
 
 import './cart-item.styles.css';
-import { addItemToCart, removeItemFromCart } from '../../pages/helper/cartHelper';
+import { addItemToCart, removeItemFromCart, clearItemFromCart } from '../../pages/helper/cartHelper';
+import ImageHelper from '../../admin/helper/imageHelper';
 
 
 const CheckoutItem = ({ product, reload=undefined, setReload=f => f }) => {
-  const { name, image, price, quantity, id } = product;
+  
+  const { name, price, quantity, id } = product;
 
   return (
     <div className='checkout-item'>
       <div className='image-container'>
-        <img src={image} alt='item' />
+          <ImageHelper product={product} />
       </div>
       <span className='name'>{name}</span>
       <span className='quantity'>
@@ -30,7 +32,7 @@ const CheckoutItem = ({ product, reload=undefined, setReload=f => f }) => {
       </span>
       <span className='price'>{price}$</span>
       <div className='remove-button' onClick={() => {
-          // clearItemFromCart(product)
+          clearItemFromCart(product)
           setReload(!reload)
       }}>
         &#10005;
