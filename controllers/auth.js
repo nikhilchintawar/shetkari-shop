@@ -43,8 +43,8 @@ const signin = (req, res) => {
         });
     }
 
-    
-  
+
+
     User.findOne({ email }, (error, user) => {
         if(error || !user) {
             return res.status(400).json({
@@ -77,7 +77,8 @@ const signOut = (req, res) => {
 //protected route
 const isSignedIn = expressjwt({
     secret: process.env.SECRET,
-    userProperty: "auth"
+    userProperty: "auth",
+    algorithms: ['RS256']
 });
 
 //custom middleware
@@ -96,7 +97,7 @@ const isAuthenticated = (req, res, next) => {
 
 const isFarmer = (req, res, next) => {
 //   console.log(req.profile)
-    if(req.profile.role === 0){ 
+    if(req.profile.role === 0){
         res.status(403).json({
             error: "only admin access."
         })
@@ -106,7 +107,7 @@ const isFarmer = (req, res, next) => {
 
 module.exports =({
     signup,
-    signin, 
+    signin,
     signOut,
     isSignedIn,
     isAuthenticated,
