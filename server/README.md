@@ -1,1 +1,0 @@
-# shetkari-shop-backend

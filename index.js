@@ -1,6 +1,5 @@
 require("dotenv").config()
 const express = require("express");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookiParser = require("cookie-parser");
 const cors = require("cors");
@@ -15,6 +14,7 @@ const stripeRoutes = require('./routes/stripePayment');
 
 //config
 const passport = require("./config/passport");
+const connectDB = require("./config/db");
 
 const app = express()
 
@@ -22,14 +22,7 @@ const app = express()
 const port = process.env.PORT || 5000
 
 //db connection
-mongoose.connect(process.env.DATABASE,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
-})
-        .then(() => console.log("db connected"))
-        .catch((error) => console.log(error))
+connectDB()
 
 //middlewares
 app.use(bodyParser.json());
