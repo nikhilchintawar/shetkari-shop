@@ -13,7 +13,7 @@ const getUser = (userId, token) => {
     .catch(error => console.log(error))
 } 
 
-const updateUser = (userId, token, user) => {
+const updateUser = async (userId, token, user) => {
     return fetch(`${API}/user/${userId}`, {
         method: "PUT",
         mode: "cors",

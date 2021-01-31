@@ -109,7 +109,7 @@ const AddProduct = () => {
             value={stock}
             handleChange={handleChange("stock")}
             />
-            <select name="category" id="category" placeholder="Categoruy" value={category} onChange={handleChange("category")}>
+            <select name="category" id="category" placeholder="Category" value={category} onChange={handleChange("category")}>
                 <option>Select</option>
                 <option value="vegetable">vegetables</option>
                 <option value="grain">grains</option>

@@ -3,15 +3,18 @@ import { withRouter } from 'react-router-dom';
 
 import "./profile.styles.css";
 import { isAuthenticated } from '../../auth/helper/auth-data';
-import { updateUser, getUser } from "../helper/userApiCall";
+import { updateUser,getUser } from "../helper/userApiCall";
 import { loadingMessage } from '../../user-authentication/utils/utils';
 import { UpdateSuccessMessage, errorMessage } from '../utils/utils';
 import DeleteUserButton from './DeleteUserButton';
 import UpdateUserForm from './UpdateUserForm';
 import InputField from "../../components/input/input.component";
 import SubmitButton from "../../components/submit-button/submit-button.component";
+import { API } from '../../backend';
 
-const Profile = ({history}) => {
+
+
+const Profile = ({history, match}) => {
     const { user, token } = isAuthenticated();
 
     const [values, setValues] = useState({
@@ -24,10 +27,11 @@ const Profile = ({history}) => {
         role: "",
         success: false,
         loading: false,
-        error: ""
+        error: "",
+        formData:""
     })
 
-    const {firstName, lastName, mobileNumber, email, postalAddress, role, success, error, loading} = values;
+    const {firstName, lastName, mobileNumber, email, postalAddress, role, success, error, loading, formData} = values;
 
     useEffect(() => {
         const preload = (userId, token) => {    
@@ -45,7 +49,8 @@ const Profile = ({history}) => {
                         mobileNumber: data.mobileNumber,
                         postalAddress: data.postalAddress,
                         // password: data.password,
-                        role: data.role
+                        role: data.role,
+                        formData: new FormData()
                         
                     })
                 }
@@ -68,13 +73,14 @@ const Profile = ({history}) => {
             postalAddress: postalAddress,
             role: role
         }
-
-        updateUser(user._id, token, newData).then(data => {
+        console.log('1',newData);
+        
+        updateUser(match.params.userId, token, newData).then(data => {
             console.log(data)
             if(data.error){
                 setValues({...values, error: data.error, success: false})
             }else{
-                console.log(data)
+                // console.log(data)
                 setValues({
                     ...values,
                     firstName:"",
@@ -91,8 +97,40 @@ const Profile = ({history}) => {
         })
     }
 
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+
+    //      setValues({...values, loading: true, error: "", success: false});
+
+    //      const newData = {
+    //          firstName: firstName,
+    //          lastName: lastName,
+    //          email: email,
+    //          mobileNumber: mobileNumber,
+    //          postalAddress: postalAddress,
+    //          role: role
+    //      }
+
+    //      const updateUser = (userId, token, user) => {
+    //         return fetch(`${API}/user/${userId}`, {
+    //             method: "PUT",
+    //             mode: "cors",
+    //             headers: {
+    //                 Accept: "application/json",
+    //                 Authorization: `Bearer ${token}`
+    //             },
+    //             body: JSON.stringify(user)
+    //         })
+    //         .then(response => response.json())
+    //         .catch(error => console.log(error))
+    //     }
+
+    //     updateUser(user._id, token, newData)
+    // }
+
     const handleChange = name => (event) => {
         const {value} = event.target;
+        // formData.append(name, value)
         setValues({ ...values, [name]: value });
     }
 //delete user
