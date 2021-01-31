@@ -13,7 +13,6 @@ const stripeRoutes = require('./routes/stripePayment');
 
 
 //config
-const passport = require("./config/passport");
 const connectDB = require("./config/db");
 
 const app = express()
